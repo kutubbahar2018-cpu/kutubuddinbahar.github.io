@@ -9,14 +9,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F8FAFC;--card:#FFFFFF;--border:#E5E7EB;--text:#111827;--text2:#374151;--muted:#6B7280;
-  --accent:#2563EB;--accent-h:#1D4ED8;--success:#16A34A;--radius:14px;
+  --bg:#F7F2E7;--card:#FFFEF9;--border:#E3D8B8;--text:#151210;--text2:#332C1F;--muted:#7A6F55;
+  --accent:#D4A017;--accent-h:#B8860B;--success:var(--accent);--radius:12px;
   box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
 html{scroll-behavior:smooth;scroll-padding-top:70px;height:100%}
-body{height:100%;margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);transition:background .3s,color .3s}
-:root[data-theme="dark"]{--bg:#0B1120;--card:#111827;--border:#1F2937;--text:#F9FAFB;--text2:#D1D5DB;--muted:#9CA3AF}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0B1120;--card:#111827;--border:#1F2937;--text:#F9FAFB;--text2:#D1D5DB;--muted:#9CA3AF}}
+body{height:100%;margin:0;font-family:Inter,system-ui,sans-serif;background-color:var(--bg);color:var(--text);transition:background .3s,color .3s;
+  background-image:repeating-linear-gradient(135deg, transparent, transparent 26px, color-mix(in srgb, var(--accent) 8%, transparent) 26px, color-mix(in srgb, var(--accent) 8%, transparent) 27px);
+  background-attachment:fixed}
+:root[data-theme="dark"]{--bg:#0A0A0A;--card:#161412;--border:#2E2A22;--text:#F7F2E7;--text2:#D8D0BA;--muted:#8C8370}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0A0A0A;--card:#161412;--border:#2E2A22;--text:#F7F2E7;--text2:#D8D0BA;--muted:#8C8370}}
 h1,h2,h3,.mono-num{font-family:Manrope,Inter,sans-serif}
 *{box-sizing:border-box}
 a{color:inherit}
@@ -36,8 +38,27 @@ nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:color
 .btn.ghost:hover{border-color:var(--accent);background:transparent}
 .theme-toggle{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px}
 .hamburger{display:none;background:none;border:none;font-size:24px;color:var(--text);cursor:pointer}
-.mobilemenu{display:none;flex-direction:column;gap:14px;padding:18px 24px;border-top:1px solid var(--border);background:var(--bg)}
-.mobilemenu.open{display:flex}
+.menu-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(2px);z-index:99;opacity:0;transition:opacity .25s}
+.menu-backdrop.open{display:block;opacity:1}
+.mobilemenu{position:fixed;top:0;right:0;height:100%;width:min(78vw,300px);z-index:100;display:flex;flex-direction:column;gap:4px;
+  padding:calc(24px + env(safe-area-inset-top,0px)) 22px 24px;background:var(--card);border-left:1px solid var(--border);
+  transform:translateX(100%);transition:transform .32s cubic-bezier(.32,.72,0,1);box-shadow:-8px 0 30px -12px rgba(0,0,0,.35)}
+.mobilemenu.open{transform:translateX(0)}
+.mobilemenu .mm-close{align-self:flex-end;background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;margin-bottom:18px;padding:4px}
+.mobilemenu a{display:flex;align-items:center;gap:14px;padding:13px 10px;border-radius:10px;text-decoration:none;color:var(--text2);font-weight:600;font-size:15px;
+  opacity:0;transform:translateX(14px);transition:opacity .3s ease,transform .3s ease,background .15s,color .15s}
+.mobilemenu.open a{opacity:1;transform:none}
+.mobilemenu.open a:nth-child(2){transition-delay:.03s}
+.mobilemenu.open a:nth-child(3){transition-delay:.06s}
+.mobilemenu.open a:nth-child(4){transition-delay:.09s}
+.mobilemenu.open a:nth-child(5){transition-delay:.12s}
+.mobilemenu.open a:nth-child(6){transition-delay:.15s}
+.mobilemenu.open a:nth-child(7){transition-delay:.18s}
+.mobilemenu a .mm-ic{width:20px;text-align:center;color:var(--accent);font-size:15px}
+.mobilemenu a:hover,.mobilemenu a.active{background:color-mix(in srgb, var(--accent) 10%, transparent);color:var(--text)}
+.mobilemenu a.active .mm-ic{color:var(--accent)}
+.mobilemenu .mm-foot{margin-top:auto;display:flex;flex-direction:column;gap:12px;opacity:0;transform:translateX(14px);transition:opacity .3s ease .05s,transform .3s ease .05s}
+.mobilemenu.open .mm-foot{opacity:1;transform:none}
 section{padding:90px 0}
 .eyebrow{color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
 h2{font-size:clamp(24px,3.5vw,34px);margin:0 0 8px}
@@ -57,14 +78,19 @@ h2{font-size:clamp(24px,3.5vw,34px);margin:0 0 8px}
 .status-card .h{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--success);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.focus-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;font-weight:500}
+.focus-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;font-weight:500;cursor:pointer}
 .focus-item:last-of-type{border-bottom:none}
+.focus-item .detail{display:none;width:100%;order:3;color:var(--muted);font-size:12.5px;font-weight:400;line-height:1.6;padding-top:6px}
+.focus-item.open{flex-wrap:wrap}
+.focus-item.open .detail{display:block}
 .badge{font-size:11px;background:color-mix(in srgb, var(--accent) 12%, transparent);color:var(--accent);padding:3px 8px;border-radius:6px;font-weight:700}
 .avail{margin-top:16px;padding-top:16px;border-top:1px dashed var(--border);font-size:13px;color:var(--muted)}
 .avail b{color:var(--text)}
 /* flow diagram */
 .flow{display:flex;flex-direction:column;gap:0;margin-top:18px}
-.flow .node{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;text-align:center}
+.flow .node{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;text-align:center;cursor:pointer;transition:background .2s,border-color .2s,transform .15s}
+.flow .node:hover{border-color:var(--accent);transform:translateY(-1px)}
+.flow .node.pulse{background:var(--accent);color:#fff;border-color:var(--accent)}
 .flow .arrow{text-align:center;color:var(--accent);font-size:14px;padding:2px 0}
 /* GRID CARDS */
 .grid{display:grid;gap:20px}
@@ -77,12 +103,22 @@ h2{font-size:clamp(24px,3.5vw,34px);margin:0 0 8px}
 .cap-card ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.9}
 .icon{width:38px;height:38px;border-radius:10px;background:color-mix(in srgb, var(--accent) 12%, transparent);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:18px}
 /* skills */
-.skill-tabs{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
-.skill-tab{padding:9px 16px;border-radius:9px;border:1px solid var(--border);background:var(--card);font-size:14px;font-weight:600;cursor:pointer;color:var(--text2)}
-.skill-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.skill-panel{display:none;gap:10px;flex-wrap:wrap}
-.skill-panel.active{display:flex}
 .pill{background:var(--card);border:1px solid var(--border);padding:8px 14px;border-radius:20px;font-size:13.5px;font-weight:500}
+.skill-tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.skill-tab{padding:9px 16px;border-radius:9px;border:1px solid var(--border);background:var(--card);font-size:13.5px;font-weight:600;cursor:pointer;color:var(--text2)}
+.skill-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.skill-panel{display:none;padding:22px 24px}
+.skill-panel.active{display:block}
+.skill-row{margin-bottom:14px}
+.skill-row:last-child{margin-bottom:0}
+.skill-row .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.skill-row .name{font-size:13.5px;font-weight:600;color:var(--text2)}
+.skill-row .level{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:5px}
+.level-learning{color:var(--muted);background:color-mix(in srgb, var(--muted) 14%, transparent)}
+.level-practicing{color:var(--accent);background:color-mix(in srgb, var(--accent) 14%, transparent)}
+.level-comfortable{color:#fff;background:var(--accent)}
+.bar-track{height:6px;border-radius:4px;background:var(--bg);border:1px solid var(--border);overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;background:var(--accent);transition:width .6s ease}
 /* process */
 .process-steps{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
 .step-btn{flex:1;min-width:110px;padding:14px 10px;text-align:center;border:1px solid var(--border);border-radius:10px;background:var(--card);cursor:pointer;font-weight:600;font-size:13px;color:var(--text2)}
@@ -93,6 +129,8 @@ h2{font-size:clamp(24px,3.5vw,34px);margin:0 0 8px}
 .step-detail .cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .step-detail ul{margin:0;padding-left:18px;color:var(--text2);font-size:14px;line-height:1.9}
 .step-detail .lbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.step-example{margin-top:20px;padding-top:18px;border-top:1px dashed var(--border);font-size:14px;color:var(--text2);line-height:1.7}
+.step-example .lbl{margin-bottom:8px}
 /* projects */
 .filters{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
 .filter-btn{padding:8px 16px;border-radius:20px;border:1px solid var(--border);background:var(--card);font-size:13.5px;font-weight:600;cursor:pointer;color:var(--text2)}
@@ -148,24 +186,32 @@ footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color
     <a href="#top" class="brand"><img src="IMG-20251022-WA0056~5.jpg" alt="Kutub Bahar" style="width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:center 20%;display:block"> Kutub Bahar</a>
     <div class="navlinks" id="navlinks">
       <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
       <a class="btn" href="#" id="cvBtn">Download CV</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
   </div>
-  <div class="mobilemenu" id="mobilemenu">
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#experience">Experience</a>
-    <a href="#contact">Contact</a>
-    <button class="btn ghost" id="themeToggleMobile">Toggle Theme</button>
-  </div>
 </nav>
+<div class="menu-backdrop" id="menuBackdrop"></div>
+<div class="mobilemenu" id="mobilemenu">
+  <button class="mm-close" id="mmClose" aria-label="Close menu">✕</button>
+  <a href="#about"><span class="mm-ic">◐</span>About</a>
+  <a href="#education"><span class="mm-ic">◈</span>Education</a>
+  <a href="#experience"><span class="mm-ic">▤</span>Experience</a>
+  <a href="#skills"><span class="mm-ic">◎</span>Skills</a>
+  <a href="#projects"><span class="mm-ic">◇</span>Projects</a>
+  <a href="#contact"><span class="mm-ic">✉</span>Contact</a>
+  <div class="mm-foot">
+    <button class="btn ghost" id="themeToggleMobile">Toggle Theme</button>
+    <a class="btn cv-link" href="#" style="justify-content:center">Download CV</a>
+  </div>
+</div>
+
 
 <section class="hero" id="top">
   <div class="wrap herogrid">
@@ -182,15 +228,15 @@ footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color
     </div>
     <div class="reveal">
       <div class="card status-card">
-        <div class="focus-item">Business Analysis <span class="badge">In Progress</span></div>
-        <div class="focus-item">SQL & Data Analytics <span class="badge">In Progress</span></div>
-        <div class="focus-item">Banking & Finance <span class="badge">Ongoing</span></div>
+        <div class="focus-item" data-detail="Practicing stakeholder analysis, root cause analysis and the 5 Whys through self-directed, scenario-based exercises.">Business Analysis <span class="badge">In Progress</span></div>
+        <div class="focus-item" data-detail="Working through SQL fundamentals in PostgreSQL — filtering, aggregation, GROUP BY / HAVING, JOINs and subqueries.">SQL & Data Analytics <span class="badge">In Progress</span></div>
+        <div class="focus-item" data-detail="Bookkeeping for M/S Shajahan Store and coursework in Financial Markets, Corporate & Retail Banking as part of my BBA.">Banking & Finance <span class="badge">Ongoing</span></div>
         <div class="avail"><b>Available for:</b> Internships & Analyst Opportunities</div>
-        <div class="flow">
-          <div class="node">Business Problem</div><div class="arrow">↓</div>
-          <div class="node">Data</div><div class="arrow">↓</div>
-          <div class="node">Analysis</div><div class="arrow">↓</div>
-          <div class="node">Decision</div>
+        <div class="flow" id="heroFlow">
+          <div class="node" data-step="0">Business Problem</div><div class="arrow">↓</div>
+          <div class="node" data-step="2">Data</div><div class="arrow">↓</div>
+          <div class="node" data-step="3">Analysis</div><div class="arrow">↓</div>
+          <div class="node" data-step="5">Decision</div>
         </div>
       </div>
     </div>
@@ -203,64 +249,12 @@ footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color
     <h2 class="reveal">I'm learning to solve business problems with structure, data, and evidence.</h2>
     <p class="sub reveal">A BBA student majoring in Banking & Insurance at the University of Dhaka (3rd year, current CGPA 3.57), developing Business Analysis and SQL skills alongside real-world experience in bookkeeping, teaching, and leadership.</p>
     <div class="timeline reveal">
-      <div class="tl-item"><div class="yr">2021–2023</div><h4>Secondary & Higher Secondary — Business Studies</h4><div class="more">SSC and HSC completed with GPA 5.00 each; SSC awarded a Board Scholarship.</div></div>
+      <div class="tl-item"><div class="yr">2021–2023</div><h4>Secondary & Higher Secondary — Business Studies</h4><div class="more">SSC and HSC completed with GPA 5.00 each; awarded a Board Scholarship at both SSC and HSC.</div></div>
       <div class="tl-item"><div class="yr">2023–Present</div><h4>BBA, University of Dhaka — Banking & Insurance</h4><div class="more">Currently in 3rd year, 5th semester, 30th Batch. Current CGPA: 3.57.</div></div>
       <div class="tl-item"><div class="yr">2024–2025</div><h4>Work, Teaching & Leadership</h4><div class="more">Bookkeeper at M/S Shajahan Store; English Instructor and later Head of Department – English at ExcelBiz; academic content contributor for HSC practice books.</div></div>
       <div class="tl-item"><div class="yr">2025–Present</div><h4>Self-Directed Business Analysis & SQL</h4><div class="more">Practicing BA techniques (stakeholder analysis, root cause analysis, 5 Whys) and SQL fundamentals (filtering, aggregation, GROUP BY/HAVING, JOINs) using PostgreSQL through guided exercises.</div></div>
       <div class="tl-item"><div class="yr">Next</div><h4>Professional Growth</h4><div class="more">Seeking opportunities to apply analytical skills to real business and data problems.</div></div>
     </div>
-  </div>
-</section>
-
-<section id="capabilities" style="background:color-mix(in srgb, var(--card) 60%, var(--bg))">
-  <div class="wrap">
-    <div class="eyebrow reveal">What I Do</div>
-    <h2 class="reveal">Key Capabilities</h2>
-    <p class="sub reveal">Grounded in coursework, self-study, and hands-on experience.</p>
-    <div class="grid cols-4 reveal">
-      <div class="card cap-card"><div class="icon">◎</div><h3>Business Analysis</h3><ul><li>Problem identification</li><li>Root cause analysis</li><li>5 Whys</li><li>Stakeholder analysis</li></ul></div>
-      <div class="card cap-card"><div class="icon">▤</div><h3>SQL & Data</h3><ul><li>Filtering & sorting</li><li>Aggregation, GROUP BY / HAVING</li><li>JOINs & subqueries</li><li>PostgreSQL</li></ul></div>
-      <div class="card cap-card"><div class="icon">◈</div><h3>Banking & Finance</h3><ul><li>Bookkeeping</li><li>Financial record-keeping</li><li>Banking & financial services</li><li>Report writing</li></ul></div>
-      <div class="card cap-card"><div class="icon">◇</div><h3>Communication</h3><ul><li>Teaching & mentoring</li><li>Public speaking</li><li>Team leadership</li><li>Event coordination</li></ul></div>
-    </div>
-  </div>
-</section>
-
-<section id="process">
-  <div class="wrap">
-    <div class="eyebrow reveal">How I Think</div>
-    <h2 class="reveal">How I Approach a Problem</h2>
-    <p class="sub reveal">The BA framework I practice through scenario-based exercises.</p>
-    <div class="process-steps reveal" id="processSteps"></div>
-    <div class="card step-detail reveal" id="stepDetail"></div>
-  </div>
-</section>
-
-<section id="projects" style="background:color-mix(in srgb, var(--card) 60%, var(--bg))">
-  <div class="wrap">
-    <div class="eyebrow reveal">Selected Projects</div>
-    <h2 class="reveal">Projects</h2>
-    <p class="sub reveal">Real, completed work — not placeholders.</p>
-    <div class="filters reveal" id="filters"></div>
-    <div class="grid cols-2 reveal" id="projectGrid"></div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="wrap">
-    <div class="eyebrow reveal">Skills</div>
-    <h2 class="reveal">Skill System</h2>
-    <p class="sub reveal">Categorized by area, not arbitrary percentages.</p>
-    <div class="skill-tabs reveal" id="skillTabs"></div>
-    <div id="skillPanels" class="reveal"></div>
-  </div>
-</section>
-
-<section id="experience" style="background:color-mix(in srgb, var(--card) 60%, var(--bg))">
-  <div class="wrap">
-    <div class="eyebrow reveal">Experience</div>
-    <h2 class="reveal">Work & Leadership</h2>
-    <div class="timeline reveal" id="expTimeline"></div>
   </div>
 </section>
 
@@ -271,179 +265,4 @@ footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color
     <div class="reveal">
       <div class="card edu-card">
         <h3>University of Dhaka</h3>
-        <div class="meta">BBA — Department of Banking & Insurance · Session 2023–2024 · Current CGPA: 3.57</div>
-        <div class="coursework">
-          <span class="pill">Financial Markets</span><span class="pill">Corporate & Retail Banking</span>
-          <span class="pill">Managerial Accounting</span><span class="pill">Public Finance</span><span class="pill">Digital Transformation</span>
-        </div>
-      </div>
-      <div class="card edu-card">
-        <h3>Government Commerce College, Chattogram</h3>
-        <div class="meta">HSC — Business Studies · 2023 · GPA 5.00</div>
-      </div>
-      <div class="card edu-card">
-        <h3>Mirza Ahmed Iqbal High School</h3>
-        <div class="meta">SSC — Business Studies · GPA 5.00 · Board Scholarship</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="wrap">
-    <div class="eyebrow reveal">Contact</div>
-    <h2 class="reveal">Have a problem to solve?</h2>
-    <p class="sub reveal">Whether it's a business problem, data project, or opportunity — I'd be happy to discuss it.</p>
-    <div class="contact-wrap reveal">
-      <div>
-        <p style="color:var(--text2);font-size:15px;line-height:1.7">Reach out directly — I respond personally to every message.</p>
-        <div class="contact-links">
-          <a class="btn" href="mailto:kutubbahar2018@gmail.com">Email Me</a>
-          <a class="btn ghost" href="tel:+8801522133848">Call</a>
-          <a class="btn ghost" href="https://instagram.com/the_pixel_booth" target="_blank" rel="noopener">Instagram Portfolio</a>
-       <a class="btn ghost" href="https://www.facebook.com/share/14x6mxEVLKC/" target="_blank" rel="noopener">Facebook</a>
-        </div>
-      </div>
-      <form id="contactForm">
-        <input type="text" placeholder="Name" required>
-        <input type="email" placeholder="Email" required>
-        <input type="text" placeholder="Subject">
-        <textarea placeholder="Message" required></textarea>
-        <button type="submit" class="btn" style="width:100%;justify-content:center">Send Message</button>
-        <div id="formMsg" style="font-size:13px;color:var(--success);margin-top:10px;display:none">Message noted — please use Email Me above to actually send it (no backend is connected here).</div>
-      </form>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div style="font-weight:800;font-family:Manrope;margin-bottom:6px">KB</div>
-    <div style="margin-bottom:10px">Business Analysis · Banking · Data</div>
-    <div>© 2026 Md Kutub Uddin Bahar · Built with curiosity and caffeine.</div>
-  </div>
-</footer>
-
-<script>
-// ---- Theme ----
-const root=document.documentElement;
-function setTheme(t){root.setAttribute('data-theme',t);localStorage.setItem('theme',t);
-  document.querySelectorAll('#themeToggle,#themeToggleMobile').forEach(b=>b.textContent=t==='dark'?'☀️':'🌙');}
-try{setTheme(localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));}catch(e){}
-document.getElementById('themeToggle').onclick=()=>setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
-document.getElementById('themeToggleMobile').onclick=()=>setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
-
-// ---- Mobile menu ----
-const hamburger=document.getElementById('hamburger'),mm=document.getElementById('mobilemenu');
-hamburger.onclick=()=>mm.classList.toggle('open');
-mm.querySelectorAll('a').forEach(a=>a.onclick=()=>mm.classList.remove('open'));
-
-// ---- CV link (configure here) ----
-const CV_URL="MD%20KUTUB%20UDDIN%20BAHAR-%20CV.pdf"; // matches your uploaded CV filename
-document.querySelectorAll('.cv-link,#cvBtn').forEach(el=>{
-  el.href=CV_URL;
-});
-
-// ---- Scroll reveal ----
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-// ---- Active nav link ----
-const sections=['about','skills','projects','experience','contact'];
-const navA=document.querySelectorAll('.navlinks a[href^="#"]');
-const secIO=new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting){navA.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}
-}),{rootMargin:'-40% 0px -50% 0px'});
-sections.forEach(id=>{const el=document.getElementById(id);if(el)secIO.observe(el);});
-
-// ---- Process steps ----
-const steps=[
- {n:'01',t:'Understand',q:['What is the business context?','Who are the stakeholders?'],tech:['Stakeholder Analysis','Power–Interest Matrix'],out:'Clear problem framing'},
- {n:'02',t:'Define',q:['What exactly is the problem?','What is out of scope?'],tech:['Problem Statements','Scope Definition'],out:'Defined problem scope'},
- {n:'03',t:'Analyze',q:['What is causing the problem?','What does the data show?'],tech:['Root Cause Analysis','5 Whys'],out:'Root causes identified'},
- {n:'04',t:'Design',q:['What options address the causes?','What are the trade-offs?'],tech:['Option Comparison'],out:'Candidate solutions'},
- {n:'05',t:'Validate',q:['Does this hold up against data/stakeholders?'],tech:['Data checks','Stakeholder review'],out:'Validated approach'},
- {n:'06',t:'Recommend',q:['What should be done, and why?'],tech:['Structured Reporting'],out:'Clear recommendation'}
-];
-const psWrap=document.getElementById('processSteps');
-steps.forEach((s,i)=>{const b=document.createElement('div');b.className='step-btn'+(i===0?' active':'');b.innerHTML=`<span class="num">${s.n}</span>${s.t}`;b.onclick=()=>showStep(i);psWrap.appendChild(b);});
-function showStep(i){
-  document.querySelectorAll('.step-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));
-  const s=steps[i];
-  document.getElementById('stepDetail').innerHTML=`<h4>${s.n} · ${s.t}</h4><div class="cols">
-    <div><div class="lbl">Questions</div><ul>${s.q.map(x=>'<li>'+x+'</li>').join('')}</ul></div>
-    <div><div class="lbl">Techniques</div><ul>${s.tech.map(x=>'<li>'+x+'</li>').join('')}</ul><div class="lbl" style="margin-top:14px">Deliverable</div><div style="color:var(--text2);font-size:14px">${s.out}</div></div>
-  </div>`;
-}
-showStep(0);
-
-// ---- Projects (data-driven) ----
-const projects=[
- {title:'Macroeconomic Development Analysis — Costa Rica, Chile & Poland',category:'Research',tools:['World Bank Data','Excel','Research & Analysis'],
-  desc:'Independent research project comparing macroeconomic indicators across three countries over a 20-year period.',
-  problem:'How do development trajectories differ across three distinct economies over two decades?',
-  approach:'Compiled and compared macroeconomic indicators using World Bank data across the three countries.',
-  outcome:'Interpreted economic trends and presented findings in a structured research format.'}
-];
-const cats=['All',...new Set(projects.map(p=>p.category))];
-const fWrap=document.getElementById('filters');
-cats.forEach((c,i)=>{const b=document.createElement('button');b.className='filter-btn'+(i===0?' active':'');b.textContent=c;
-  b.onclick=()=>{document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderProjects(c);};
-  fWrap.appendChild(b);});
-function renderProjects(cat){
-  const grid=document.getElementById('projectGrid');grid.innerHTML='';
-  projects.filter(p=>cat==='All'||p.category===cat).forEach((p,idx)=>{
-    const el=document.createElement('div');el.className='card project-card';
-    el.innerHTML=`<div class="type">${p.category}</div><h3>${p.title}</h3><p>${p.desc}</p>
-      <div class="tools">${p.tools.map(t=>'<span class="tool">'+t+'</span>').join('')}</div>
-      <div class="project-detail" id="pd${idx}"><b>Problem:</b> ${p.problem}<br><br><b>Approach:</b> ${p.approach}<br><br><b>Outcome:</b> ${p.outcome}</div>`;
-    el.onclick=()=>document.getElementById('pd'+idx).classList.toggle('open');
-    grid.appendChild(el);
-  });
-}
-renderProjects('All');
-
-// ---- Skills ----
-const skillData={
- 'Business Analysis':['Problem Identification','Root Cause Analysis','5 Whys','Stakeholder Analysis','Power–Interest Matrix'],
- 'SQL & Data':['SQL Querying','Filtering & Sorting','Aggregation','GROUP BY','HAVING','JOINs','NULL Handling','Subqueries','PostgreSQL'],
- 'Business & Finance':['Bookkeeping','Data Interpretation','Research & Analysis','Report Writing','Banking & Financial Services'],
- 'Leadership & Communication':['Team Leadership','Event Coordination','Teaching & Mentoring','Public Speaking'],
- 'Tools':['Excel','PowerPoint','Word','Google Workspace','Canva']
-};
-const tabWrap=document.getElementById('skillTabs'),panelWrap=document.getElementById('skillPanels');
-Object.keys(skillData).forEach((cat,i)=>{
-  const tab=document.createElement('button');tab.className='skill-tab'+(i===0?' active':'');tab.textContent=cat;
-  tab.onclick=()=>{document.querySelectorAll('.skill-tab').forEach(t=>t.classList.remove('active'));tab.classList.add('active');
-    document.querySelectorAll('.skill-panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel'+i).classList.add('active');};
-  tabWrap.appendChild(tab);
-  const panel=document.createElement('div');panel.className='skill-panel'+(i===0?' active':'');panel.id='panel'+i;
-  panel.innerHTML=skillData[cat].map(s=>'<span class="pill">'+s+'</span>').join('');
-  panelWrap.appendChild(panel);
-});
-
-// ---- Experience timeline ----
-const exp=[
-{yr:'June 5, 2026 – Present',t:'English Instructor — 10 Minute School English Centre',more:'Conducting structured English instruction at 10 Minute School English Centre.'},
-  {yr:'2025 – Present',t:'Head of Photography & Travel — BCB-71',more:'Led photography and travel initiatives for the Banking Community of Bijoy 71 Hall; organized and coordinated group events and documentation efforts.'},
- {yr:'2024 – 2025',t:'Head of Department – English — ExcelBiz, Dhaka',more:'Led the English department, overseeing curriculum delivery and instructional quality; coordinated with instructors and adapted teaching approaches to student needs.'},
- {yr:'2023 – 2024',t:'English Instructor — ExcelBiz, Shwapno Dhabi Dhaka',more:'Conducted structured English instruction, identified learning gaps through observation and assessment, and adapted methods to individual student needs.'},
- {yr:'2023 – 2024',t:'Academic Content Contributor — Shwapno Dhabi Publications',more:'Contributed to English grammar content for HSC-level learners; developed exercises and reviewed material for clarity (Admission Written Book, HSC Academic Practice Book).'},
- {yr:'Ongoing',t:'Bookkeeper — M/S Shajahan Store, Chattogram',more:'Maintained financial records and transaction logs; tracked income and expenses and reconciled accounts on a regular basis; supported basic financial reporting.'},
- {yr:'Volunteering',t:'Flood Relief Volunteer',more:'Helped raise approximately BDT 52,000 in flood relief funds and helped organize, manage, and dispatch relief goods to roughly 150 affected families.'}
-];
-const expWrap=document.getElementById('expTimeline');
-exp.forEach(e=>{const el=document.createElement('div');el.className='tl-item';
-  el.innerHTML=`<div class="yr">${e.yr}</div><h4>${e.t}</h4><div class="more">${e.more}</div>`;
-  el.onclick=()=>el.classList.toggle('open');
-  expWrap.appendChild(el);
-});
-document.querySelectorAll('#about .tl-item').forEach(el=>el.onclick=()=>el.classList.toggle('open'));
-
-// ---- Contact form (no backend — front-end only) ----
-document.getElementById('contactForm').addEventListener('submit',e=>{
-  e.preventDefault();document.getElementById('formMsg').style.display='block';
-});
-</script>
-</body>
-</html>
+        <
