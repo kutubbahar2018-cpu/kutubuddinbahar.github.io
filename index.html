@@ -265,4 +265,290 @@ footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color
     <div class="reveal">
       <div class="card edu-card">
         <h3>University of Dhaka</h3>
-        <
+        <div class="meta">BBA — Department of Banking & Insurance · Session 2023–2024 · Current CGPA: 3.57</div>
+        <div class="coursework">
+          <span class="pill">Financial Markets</span><span class="pill">Corporate & Retail Banking</span>
+          <span class="pill">Managerial Accounting</span><span class="pill">Public Finance</span><span class="pill">Digital Transformation</span>
+        </div>
+      </div>
+      <div class="card edu-card">
+        <h3>Government Commerce College, Chattogram</h3>
+        <div class="meta">HSC — Business Studies · 2023 · GPA 5.00 · Board Scholarship</div>
+      </div>
+      <div class="card edu-card">
+        <h3>Mirza Ahmed Iqbal High School</h3>
+        <div class="meta">SSC — Business Studies · GPA 5.00 · Board Scholarship</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" style="background:color-mix(in srgb, var(--card) 60%, var(--bg))">
+  <div class="wrap">
+    <div class="eyebrow reveal">Experience</div>
+    <h2 class="reveal">Work & Leadership</h2>
+    <div class="timeline reveal" id="expTimeline"></div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow reveal">Skills</div>
+    <h2 class="reveal">Skill System</h2>
+    <p class="sub reveal">Tap a category — grouped by area, with an honest read on where I stand.</p>
+    <div class="skill-tabs reveal" id="skillTabs"></div>
+    <div class="card reveal" id="skillPanels"></div>
+  </div>
+</section>
+
+<section id="capabilities" style="background:color-mix(in srgb, var(--card) 60%, var(--bg))">
+  <div class="wrap">
+    <div class="eyebrow reveal">What I Do</div>
+    <h2 class="reveal">Key Capabilities</h2>
+    <p class="sub reveal">Grounded in coursework, self-study, and hands-on experience.</p>
+    <div class="grid cols-4 reveal">
+      <div class="card cap-card"><div class="icon">◎</div><h3>Business Analysis</h3><ul><li>Problem identification</li><li>Root cause analysis</li><li>5 Whys</li><li>Stakeholder analysis</li></ul></div>
+      <div class="card cap-card"><div class="icon">▤</div><h3>SQL & Data</h3><ul><li>Filtering & sorting</li><li>Aggregation, GROUP BY / HAVING</li><li>JOINs & subqueries</li><li>PostgreSQL</li></ul></div>
+      <div class="card cap-card"><div class="icon">◈</div><h3>Banking & Finance</h3><ul><li>Bookkeeping</li><li>Financial record-keeping</li><li>Banking & financial services</li><li>Report writing</li></ul></div>
+      <div class="card cap-card"><div class="icon">◇</div><h3>Communication</h3><ul><li>Teaching & mentoring</li><li>Public speaking</li><li>Team leadership</li><li>Event coordination</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="eyebrow reveal">How I Think</div>
+    <h2 class="reveal">How I Approach a Problem</h2>
+    <p class="sub reveal">The BA framework I practice through scenario-based exercises.</p>
+    <div class="process-steps reveal" id="processSteps"></div>
+    <div class="card step-detail reveal" id="stepDetail"></div>
+  </div>
+</section>
+
+<section id="projects" style="background:color-mix(in srgb, var(--card) 60%, var(--bg))">
+  <div class="wrap">
+    <div class="eyebrow reveal">Selected Projects</div>
+    <h2 class="reveal">Projects</h2>
+    <p class="sub reveal">Real, completed work — not placeholders.</p>
+    <div class="filters reveal" id="filters"></div>
+    <div class="grid cols-2 reveal" id="projectGrid"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow reveal">Contact</div>
+    <h2 class="reveal">Have a problem to solve?</h2>
+    <p class="sub reveal">Whether it's a business problem, data project, or opportunity — I'd be happy to discuss it.</p>
+    <div class="contact-wrap reveal">
+      <div>
+        <p style="color:var(--text2);font-size:15px;line-height:1.7">Reach out directly — I respond personally to every message.</p>
+        <div class="contact-links">
+          <a class="btn" href="mailto:kutubbahar2018@gmail.com">Email Me</a>
+          <a class="btn ghost" href="tel:+8801522133848">Call</a>
+          <a class="btn ghost" href="https://instagram.com/the_pixel_booth" target="_blank" rel="noopener">Instagram Portfolio</a>
+       <a class="btn ghost" href="https://www.facebook.com/share/14x6mxEVLKC/" target="_blank" rel="noopener">Facebook</a>
+        </div>
+      </div>
+      <form id="contactForm" action="https://formspree.io/f/xeaopnnl" method="POST">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="subject" placeholder="Subject">
+        <textarea name="message" placeholder="Message" required></textarea>
+        <button type="submit" class="btn" style="width:100%;justify-content:center" id="contactSubmit">Send Message</button>
+        <div id="formMsg" style="font-size:13px;margin-top:10px;display:none"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div style="font-weight:800;font-family:Manrope;margin-bottom:6px">KB</div>
+    <div style="margin-bottom:10px">Business Analysis · Banking · Data</div>
+    <div>© 2026 Md Kutub Uddin Bahar · Built with curiosity and caffeine.</div>
+  </div>
+</footer>
+
+<script>
+// ---- Theme ----
+const root=document.documentElement;
+function setTheme(t){root.setAttribute('data-theme',t);localStorage.setItem('theme',t);
+  document.querySelectorAll('#themeToggle,#themeToggleMobile').forEach(b=>b.textContent=t==='dark'?'☀️':'🌙');}
+try{setTheme(localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));}catch(e){}
+document.getElementById('themeToggle').onclick=()=>setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
+document.getElementById('themeToggleMobile').onclick=()=>setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
+
+// ---- Hero status card interactivity ----
+document.querySelectorAll('.focus-item').forEach(item=>{
+  const d=document.createElement('div');d.className='detail';d.textContent=item.dataset.detail;
+  item.appendChild(d);
+  item.addEventListener('click',()=>item.classList.toggle('open'));
+});
+document.querySelectorAll('#heroFlow .node').forEach(node=>{
+  node.addEventListener('click',()=>{
+    document.querySelectorAll('#heroFlow .node').forEach(n=>n.classList.remove('pulse'));
+    node.classList.add('pulse');
+    const idx=parseInt(node.dataset.step,10);
+    document.getElementById('process').scrollIntoView({behavior:'smooth',block:'start'});
+    setTimeout(()=>showStep(idx),350);
+    setTimeout(()=>node.classList.remove('pulse'),1400);
+  });
+});
+
+// ---- Mobile menu ----
+const hamburger=document.getElementById('hamburger'),mm=document.getElementById('mobilemenu'),mmBackdrop=document.getElementById('menuBackdrop'),mmClose=document.getElementById('mmClose');
+function openMenu(){mm.classList.add('open');mmBackdrop.classList.add('open');document.body.style.overflow='hidden';}
+function closeMenu(){mm.classList.remove('open');mmBackdrop.classList.remove('open');document.body.style.overflow='';}
+hamburger.onclick=()=>{mm.classList.contains('open')?closeMenu():openMenu();};
+mmClose.onclick=closeMenu;
+mmBackdrop.onclick=closeMenu;
+mm.querySelectorAll('a').forEach(a=>a.onclick=closeMenu);
+
+// ---- CV link (configure here) ----
+const CV_URL="MD%20KUTUB%20UDDIN%20BAHAR-%20CV.pdf"; // matches your uploaded CV filename
+document.querySelectorAll('.cv-link,#cvBtn').forEach(el=>{
+  el.href=CV_URL;
+});
+
+// ---- Scroll reveal ----
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// ---- Active nav link ----
+const sections=['about','education','experience','skills','projects','contact'];
+const navA=document.querySelectorAll('.navlinks a[href^="#"], .mobilemenu a[href^="#"]');
+const secIO=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){navA.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}
+}),{rootMargin:'-40% 0px -50% 0px'});
+sections.forEach(id=>{const el=document.getElementById(id);if(el)secIO.observe(el);});
+
+// ---- Process steps ----
+const steps=[
+ {n:'01',t:'Understand',q:['What is the business context?','Who are the stakeholders?'],tech:['Stakeholder Analysis','Power–Interest Matrix'],out:'Clear problem framing',
+  ex:'On the Costa Rica–Chile–Poland research project: framed the goal as understanding how three distinct economies diverged over 20 years, and who the analysis was for (an academic audience wanting comparative insight, not just raw numbers).'},
+ {n:'02',t:'Define',q:['What exactly is the problem?','What is out of scope?'],tech:['Problem Statements','Scope Definition'],out:'Defined problem scope',
+  ex:'Scoped the project to a fixed 20-year window and a fixed set of macroeconomic indicators from World Bank data, ruling out qualitative/political factors to keep the comparison tractable.'},
+ {n:'03',t:'Analyze',q:['What is causing the problem?','What does the data show?'],tech:['Root Cause Analysis','5 Whys'],out:'Root causes identified',
+  ex:'Compiled and compared the indicators across all three countries to see where trajectories split and by how much, rather than just eyeballing each country in isolation.'},
+ {n:'04',t:'Design',q:['What options address the causes?','What are the trade-offs?'],tech:['Option Comparison'],out:'Candidate solutions',
+  ex:'Weighed a few ways to present the comparison — country-by-country narrative vs. indicator-by-indicator — and picked the structure that made the 20-year divergence easiest to follow.'},
+ {n:'05',t:'Validate',q:['Does this hold up against data/stakeholders?'],tech:['Data checks','Stakeholder review'],out:'Validated approach',
+  ex:'Cross-checked the interpreted trends back against the raw World Bank figures before finalizing conclusions, to avoid over-reading a pattern that wasn\'t really there.'},
+ {n:'06',t:'Recommend',q:['What should be done, and why?'],tech:['Structured Reporting'],out:'Clear recommendation',
+  ex:'Wrote up the findings in a structured research format — clear comparison, clear takeaways — the same report-writing discipline I now apply to analyst-style write-ups.'}
+];
+const psWrap=document.getElementById('processSteps');
+steps.forEach((s,i)=>{const b=document.createElement('div');b.className='step-btn'+(i===0?' active':'');b.innerHTML=`<span class="num">${s.n}</span>${s.t}`;b.onclick=()=>showStep(i);psWrap.appendChild(b);});
+function showStep(i){
+  document.querySelectorAll('.step-btn').forEach((b,idx)=>b.classList.toggle('active',idx===i));
+  const s=steps[i];
+  document.getElementById('stepDetail').innerHTML=`<h4>${s.n} · ${s.t}</h4><div class="cols">
+    <div><div class="lbl">Questions</div><ul>${s.q.map(x=>'<li>'+x+'</li>').join('')}</ul></div>
+    <div><div class="lbl">Techniques</div><ul>${s.tech.map(x=>'<li>'+x+'</li>').join('')}</ul><div class="lbl" style="margin-top:14px">Deliverable</div><div style="color:var(--text2);font-size:14px">${s.out}</div></div>
+  </div>
+  <div class="step-example"><div class="lbl">Applied on my macroeconomic research project</div>${s.ex}</div>`;
+}
+showStep(0);
+
+// ---- Projects (data-driven) ----
+const projects=[
+ {title:'Macroeconomic Development Analysis — Costa Rica, Chile & Poland',category:'Research',tools:['World Bank Data','Excel','Research & Analysis'],
+  desc:'Independent research project comparing macroeconomic indicators across three countries over a 20-year period.',
+  problem:'How do development trajectories differ across three distinct economies over two decades?',
+  approach:'Compiled and compared macroeconomic indicators using World Bank data across the three countries.',
+  outcome:'Interpreted economic trends and presented findings in a structured research format.'}
+];
+const cats=['All',...new Set(projects.map(p=>p.category))];
+const fWrap=document.getElementById('filters');
+cats.forEach((c,i)=>{const b=document.createElement('button');b.className='filter-btn'+(i===0?' active':'');b.textContent=c;
+  b.onclick=()=>{document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderProjects(c);};
+  fWrap.appendChild(b);});
+function renderProjects(cat){
+  const grid=document.getElementById('projectGrid');grid.innerHTML='';
+  projects.filter(p=>cat==='All'||p.category===cat).forEach((p,idx)=>{
+    const el=document.createElement('div');el.className='card project-card';
+    el.innerHTML=`<div class="type">${p.category}</div><h3>${p.title}</h3><p>${p.desc}</p>
+      <div class="tools">${p.tools.map(t=>'<span class="tool">'+t+'</span>').join('')}</div>
+      <div class="project-detail" id="pd${idx}"><b>Problem:</b> ${p.problem}<br><br><b>Approach:</b> ${p.approach}<br><br><b>Outcome:</b> ${p.outcome}</div>`;
+    el.onclick=()=>document.getElementById('pd'+idx).classList.toggle('open');
+    grid.appendChild(el);
+  });
+}
+renderProjects('All');
+
+// ---- Skills ----
+// level: 1=Learning, 2=Practicing, 3=Comfortable
+const skillData={
+ 'Business Analysis':[
+   ['Stakeholder Analysis',2],['Problem Identification',2],['Root Cause Analysis',2],['5 Whys',3],['Power–Interest Matrix',1]
+ ],
+ 'SQL & Data':[
+   ['Filtering & Sorting',3],['SQL Querying',2],['Aggregation / GROUP BY',2],['JOINs',2],['HAVING',1],['Subqueries',1],['PostgreSQL',2]
+ ],
+ 'Business & Finance':[
+   ['Bookkeeping',3],['Report Writing',3],['Research & Analysis',3],['Data Interpretation',2],['Banking & Financial Services',2]
+ ],
+ 'Leadership & Communication':[
+   ['Teaching & Mentoring',3],['Public Speaking',3],['Team Leadership',3],['Event Coordination',3]
+ ],
+ 'Tools':[
+   ['PowerPoint',3],['Word',3],['Google Workspace',3],['Canva',3],['Excel',2]
+ ]
+};
+const levelMeta={1:['Learning','level-learning',33],2:['Practicing','level-practicing',66],3:['Comfortable','level-comfortable',100]};
+const tabWrap=document.getElementById('skillTabs'),panelWrap=document.getElementById('skillPanels');
+function renderPanel(cat){
+  panelWrap.innerHTML=skillData[cat].map(([name,lvl])=>{
+    const [label,cls,pct]=levelMeta[lvl];
+    return `<div class="skill-row"><div class="top"><span class="name">${name}</span><span class="level ${cls}">${label}</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div></div>`;
+  }).join('');
+}
+Object.keys(skillData).forEach((cat,i)=>{
+  const tab=document.createElement('button');tab.className='skill-tab'+(i===0?' active':'');tab.textContent=cat;
+  tab.onclick=()=>{document.querySelectorAll('.skill-tab').forEach(t=>t.classList.remove('active'));tab.classList.add('active');renderPanel(cat);};
+  tabWrap.appendChild(tab);
+});
+renderPanel(Object.keys(skillData)[0]);
+
+// ---- Experience timeline ----
+const exp=[
+{yr:'June 5, 2026 – Present',t:'English Instructor — 10 Minute School English Centre',more:'Conducting structured English instruction at 10 Minute School English Centre.'},
+  {yr:'2025 – Present',t:'Head of Photography & Travel — BCB-71',more:'Led photography and travel initiatives for the Banking Community of Bijoy 71 Hall; organized and coordinated group events and documentation efforts.'},
+ {yr:'2024 – 2025',t:'Head of Department – English — ExcelBiz, Dhaka',more:'Led the English department, overseeing curriculum delivery and instructional quality; coordinated with instructors and adapted teaching approaches to student needs.'},
+ {yr:'2023 – 2024',t:'English Instructor — ExcelBiz, Shwapno Dhabi Dhaka',more:'Conducted structured English instruction, identified learning gaps through observation and assessment, and adapted methods to individual student needs.'},
+ {yr:'2023 – 2024',t:'Academic Content Contributor — Shwapno Dhabi Publications',more:'Contributed to English grammar content for HSC-level learners; developed exercises and reviewed material for clarity (Admission Written Book, HSC Academic Practice Book).'},
+ {yr:'Ongoing',t:'Bookkeeper — M/S Shajahan Store, Chattogram',more:'Maintained financial records and transaction logs; tracked income and expenses and reconciled accounts on a regular basis; supported basic financial reporting.'},
+ {yr:'Volunteering',t:'Flood Relief Volunteer',more:'Helped raise approximately BDT 52,000 in flood relief funds and helped organize, manage, and dispatch relief goods to roughly 150 affected families.'}
+];
+const expWrap=document.getElementById('expTimeline');
+exp.forEach(e=>{const el=document.createElement('div');el.className='tl-item';
+  el.innerHTML=`<div class="yr">${e.yr}</div><h4>${e.t}</h4><div class="more">${e.more}</div>`;
+  el.onclick=()=>el.classList.toggle('open');
+  expWrap.appendChild(el);
+});
+document.querySelectorAll('#about .tl-item').forEach(el=>el.onclick=()=>el.classList.toggle('open'));
+
+// ---- Contact form (no backend — front-end only) ----
+const contactForm=document.getElementById('contactForm'),contactMsg=document.getElementById('formMsg'),contactBtn=document.getElementById('contactSubmit');
+contactForm.addEventListener('submit',async e=>{
+  e.preventDefault();
+  contactBtn.disabled=true;contactBtn.textContent='Sending…';
+  try{
+    const res=await fetch(contactForm.action,{method:'POST',body:new FormData(contactForm),headers:{'Accept':'application/json'}});
+    if(res.ok){
+      contactMsg.style.color='var(--success)';contactMsg.textContent='Thanks — your message was sent. I\'ll get back to you soon.';
+      contactForm.reset();
+    }else{
+      contactMsg.style.color='#c0392b';contactMsg.textContent='Something went wrong sending that — please email me directly instead.';
+    }
+  }catch(err){
+    contactMsg.style.color='#c0392b';contactMsg.textContent='Something went wrong sending that — please email me directly instead.';
+  }
+  contactMsg.style.display='block';
+  contactBtn.disabled=false;contactBtn.textContent='Send Message';
+});
+</script>
+</body>
+</html>
