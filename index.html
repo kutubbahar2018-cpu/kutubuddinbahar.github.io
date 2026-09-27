@@ -182,6 +182,7 @@ footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color
     </div>
     <div class="reveal">
       <div class="card status-card">
+        <img src="IMG-20251022-WA0056~5.jpg" alt="Kutub Bahar" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);margin-bottom:16px;display:block" onerror="this.style.display='none'">
         <div class="h"><span class="dot"></span> Current Focus</div>
         <div class="focus-item">Business Analysis <span class="badge">In Progress</span></div>
         <div class="focus-item">SQL & Data Analytics <span class="badge">In Progress</span></div>
@@ -339,10 +340,9 @@ hamburger.onclick=()=>mm.classList.toggle('open');
 mm.querySelectorAll('a').forEach(a=>a.onclick=()=>mm.classList.remove('open'));
 
 // ---- CV link (configure here) ----
-const CV_URL="#"; // TODO: replace with your hosted CV PDF link
+const CV_URL="MD%20KUTUB%20UDDIN%20BAHAR-%20CV.pdf"; // matches your uploaded CV filename
 document.querySelectorAll('.cv-link,#cvBtn').forEach(el=>{
   el.href=CV_URL;
-  if(CV_URL==="#"){el.addEventListener('click',e=>{e.preventDefault();alert('Add your CV PDF link in the CV_URL variable in the code to enable this button.');});}
 });
 
 // ---- Scroll reveal ----
