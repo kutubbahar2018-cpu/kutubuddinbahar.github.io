@@ -55,6 +55,7 @@ nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:color
 .mobilemenu.open a:nth-child(5){transition-delay:.12s}
 .mobilemenu.open a:nth-child(6){transition-delay:.15s}
 .mobilemenu.open a:nth-child(7){transition-delay:.18s}
+.mobilemenu.open a:nth-child(8){transition-delay:.21s}
 .mobilemenu a .mm-ic{width:20px;text-align:center;color:var(--accent);font-size:15px}
 .mobilemenu a:hover,.mobilemenu a.active{background:color-mix(in srgb, var(--accent) 10%, transparent);color:var(--text)}
 .mobilemenu a.active .mm-ic{color:var(--accent)}
@@ -163,6 +164,34 @@ h2{font-size:clamp(24px,3.5vw,34px);margin:0 0 8px}
 .contact-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
 input,textarea{width:100%;padding:12px 14px;border-radius:9px;border:1px solid var(--border);background:var(--card);color:var(--text);font-family:Inter;font-size:14px;margin-bottom:14px}
 textarea{resize:vertical;min-height:100px}
+/* contact details list */
+.contact-list{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.contact-list li{display:flex;align-items:center;gap:12px;font-size:14.5px;color:var(--text2);min-width:0}
+.contact-list .ci{width:34px;height:34px;border-radius:9px;background:color-mix(in srgb, var(--accent) 12%, transparent);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.contact-list .cl{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.contact-list a{text-decoration:none;font-weight:600;color:var(--text);word-break:break-word}
+.contact-list a:hover{color:var(--accent)}
+/* learning wall (blog style) */
+.blog{display:grid;grid-template-columns:1fr 260px;gap:28px;align-items:start}
+@media(max-width:900px){.blog{grid-template-columns:1fr}}
+.post{padding:32px 34px;border-left:4px solid var(--accent);animation:postin .4s ease both}
+@media(max-width:560px){.post{padding:24px 20px}}
+.post .meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:12px}
+.post .tag{background:color-mix(in srgb, var(--accent) 14%, transparent);color:var(--accent);padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.post h3{font-size:clamp(22px,3vw,28px);line-height:1.25;margin:0 0 16px}
+.post .body p{margin:0 0 14px;font-size:15.5px;line-height:1.85;color:var(--text2)}
+.post .body p:last-child{margin-bottom:0}
+.archive{padding:18px}
+.archive .h{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.arch-item{display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--border);padding:11px 6px;cursor:pointer;color:var(--text2);font-family:Inter,sans-serif}
+.arch-item:last-child{border-bottom:none}
+.arch-item .ad{display:block;font-size:11.5px;color:var(--muted);font-weight:600;margin-bottom:2px}
+.arch-item .at{display:block;font-size:14px;font-weight:600;line-height:1.35}
+.arch-item:hover .at{color:var(--accent)}
+.arch-item.active{background:color-mix(in srgb, var(--accent) 9%, transparent);border-radius:8px}
+.arch-item.active .at{color:var(--accent)}
+.wall-empty{color:var(--muted);font-size:14px;padding:30px 0}
+@keyframes postin{from{opacity:0;transform:translateY(10px)}}
 footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color:var(--muted);font-size:13.5px}
 .mono-num{font-size:28px;font-weight:800;color:var(--accent)}
 @media(max-width:900px){
@@ -322,6 +351,7 @@ nav.scrolled{box-shadow:0 8px 24px -14px rgba(0,0,0,.55)}
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#learning">Learning</a>
+      <a href="#wall">Wall</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
       <button class="theme-switch" id="themeToggle" role="switch" aria-checked="false" aria-label="Toggle dark mode"><span class="ts-ic">☀️</span><span class="ts-ic">🌙</span><span class="ts-knob"></span></button>
@@ -338,6 +368,7 @@ nav.scrolled{box-shadow:0 8px 24px -14px rgba(0,0,0,.55)}
   <a href="#experience"><span class="mm-ic">▤</span>Experience</a>
   <a href="#skills"><span class="mm-ic">◎</span>Skills</a>
   <a href="#learning"><span class="mm-ic">↗</span>Learning</a>
+  <a href="#wall"><span class="mm-ic">✎</span>Wall</a>
   <a href="#projects"><span class="mm-ic">◇</span>Projects</a>
   <a href="#contact"><span class="mm-ic">✉</span>Contact</a>
   <div class="mm-foot">
@@ -462,6 +493,18 @@ nav.scrolled{box-shadow:0 8px 24px -14px rgba(0,0,0,.55)}
     <h2 class="reveal">What I'm Learning Right Now</h2>
     <p class="sub reveal">Live progress on what I'm studying. Tap a card to see my notes and next steps.</p>
     <div class="grid cols-2" id="learnGrid"></div>
+  </div>
+</section>
+
+<section id="wall">
+  <div class="wrap">
+    <div class="eyebrow reveal">Learning Wall</div>
+    <h2 class="reveal">Daily Learnings</h2>
+    <p class="sub reveal">A short daily note on what I learned — latest first.</p>
+    <div class="blog" id="blog">
+      <article class="card post" id="post"></article>
+      <aside class="card archive" id="archive"></aside>
+    </div>
   </div>
 </section>
 
@@ -597,6 +640,12 @@ nav.scrolled{box-shadow:0 8px 24px -14px rgba(0,0,0,.55)}
     <div class="contact-wrap reveal">
       <div>
         <p style="color:var(--text2);font-size:15px;line-height:1.7">Reach out directly — I respond personally to every message.</p>
+        <ul class="contact-list">
+          <li><span class="ci">✉</span><div><span class="cl">Email</span><a href="mailto:kutubbahar2018@gmail.com">kutubbahar2018@gmail.com</a></div></li>
+          <li><span class="ci">☎</span><div><span class="cl">Phone</span><a href="tel:+8801522133848">+880 1522-133848</a></div></li>
+          <li><span class="ci">◎</span><div><span class="cl">Instagram</span><a href="https://instagram.com/the_pixel_booth" target="_blank" rel="noopener">@the_pixel_booth</a></div></li>
+          <li><span class="ci">f</span><div><span class="cl">Facebook</span><a href="https://www.facebook.com/share/14x6mxEVLKC/" target="_blank" rel="noopener">Md Kutub Uddin Bahar</a></div></li>
+        </ul>
         <div class="contact-links">
           <a class="btn" href="mailto:kutubbahar2018@gmail.com">Email Me</a>
           <a class="btn ghost" href="tel:+8801522133848">Call</a>
@@ -624,6 +673,7 @@ nav.scrolled{box-shadow:0 8px 24px -14px rgba(0,0,0,.55)}
   </div>
 </footer>
 
+<script src="wall.js"></script>
 <script>
 // ---- Theme ----
 const root=document.documentElement;
@@ -675,7 +725,7 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.targe
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 // ---- Active nav link ----
-const sections=['about','education','experience','skills','learning','projects','contact'];
+const sections=['about','education','experience','skills','learning','wall','projects','contact'];
 const navA=document.querySelectorAll('.navlinks a[href^="#"], .mobilemenu a[href^="#"]');
 const secIO=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){navA.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}
@@ -1004,6 +1054,40 @@ function runSwot(){
 }
 document.getElementById('swotBtn').addEventListener('click',e=>{runSwot();const r=e.target.getBoundingClientRect();if(Math.random()<0.15)confetti(r.left+r.width/2,r.top);});
 runSwot();
+
+// ---- Learning Wall (blog style) ----
+(function(){
+  const post=document.getElementById('post'),arch=document.getElementById('archive');
+  if(!post)return;
+  const posts=(typeof WALL!=='undefined'?WALL:[]).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+  const fmt=d=>{const t=new Date(d+'T00:00:00');return isNaN(t)?d:t.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});};
+  let cur=0;
+  function show(i){
+    cur=i;const n=posts[i];
+    post.style.animation='none';void post.offsetWidth;post.style.animation='';
+    post.innerHTML='';
+    const meta=document.createElement('div');meta.className='meta';
+    const d=document.createElement('span');d.textContent=fmt(n.date);meta.appendChild(d);
+    if(n.tag){const t=document.createElement('span');t.className='tag';t.textContent=n.tag;meta.appendChild(t);}
+    const h=document.createElement('h3');h.textContent=n.title||'';
+    const body=document.createElement('div');body.className='body';
+    String(n.text||'').split('\n').filter(x=>x.trim()).forEach(line=>{const p=document.createElement('p');p.textContent=line;body.appendChild(p);});
+    post.append(meta,h,body);
+    arch.querySelectorAll('.arch-item').forEach((b,j)=>b.classList.toggle('active',j===i));
+  }
+  if(!posts.length){post.innerHTML='<div class="wall-empty">No posts yet — check back soon.</div>';arch.style.display='none';return;}
+  if(posts.length===1){arch.style.display='none';document.getElementById('blog').style.gridTemplateColumns='1fr';}
+  else{
+    const hd=document.createElement('div');hd.className='h';hd.textContent='Earlier posts';arch.appendChild(hd);
+    posts.forEach((n,i)=>{
+      const b=document.createElement('button');b.type='button';b.className='arch-item';
+      const ad=document.createElement('span');ad.className='ad';ad.textContent=fmt(n.date);
+      const at=document.createElement('span');at.className='at';at.textContent=n.title||'';
+      b.append(ad,at);b.onclick=()=>show(i);arch.appendChild(b);
+    });
+  }
+  show(0);
+})();
 </script>
 </body>
 </html>
