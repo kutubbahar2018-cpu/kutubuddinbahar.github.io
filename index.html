@@ -176,11 +176,30 @@ footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color
   .grid.cols-2,.grid.cols-3,.grid.cols-4{grid-template-columns:1fr}
   .process-steps{flex-direction:column}
 }
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:200}
+.typed::after{content:'|';margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:32px}
+.stat{padding:14px 8px;text-align:center}
+.stat .mono-num{display:block;font-size:24px}
+.stat .l{font-size:12px;color:var(--muted)}
+.swot-card{padding:26px}
+.swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+.swot-cell{border:1px solid var(--border);border-radius:9px;padding:12px 14px;min-height:64px;background:var(--bg);font-size:13.5px;line-height:1.55}
+.swot-cell .k{display:block;font-family:Manrope;font-weight:800;font-size:11px;letter-spacing:.03em;color:var(--accent);margin-bottom:4px}
+.swot-cell.pop{animation:pop .35s ease}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}}
+@media(max-width:560px){.swot-grid{grid-template-columns:1fr}}
+@keyframes pop{from{opacity:0;transform:translateX(-12px)}}
+.confetti{position:fixed;pointer-events:none;z-index:300;font-size:20px;animation:fall 1.1s ease-out forwards}
+@keyframes fall{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+@media(max-width:560px){.stats{grid-template-columns:1fr 1fr}}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 
+<div id="prog"></div>
 <nav>
   <div class="wrap navrow">
     <a href="#top" class="brand"><img src="IMG-20251022-WA0056~5.jpg" alt="Kutub Bahar" style="width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:center 20%;display:block"> Kutub Bahar</a>
@@ -219,11 +238,17 @@ footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color
       <div class="eyebrow reveal">Hello, I'm</div>
       <h1 class="reveal">Md Kutub Uddin Bahar</h1>
       <div class="role reveal">Aspiring Business Analyst</div>
-      <div class="role reveal" style="font-size:14px;color:var(--muted);font-weight:600;margin-top:-8px">Banking & Finance · Data Analytics</div>
+      <div class="role reveal typed" id="typed" style="font-size:14px;color:var(--muted);font-weight:600;margin-top:-8px">Banking & Finance · Data Analytics</div>
       <p class="desc reveal">BBA student at the University of Dhaka (Banking & Insurance), building practical Business Analysis and SQL skills through self-directed study and applied research — with a background in financial record-keeping, teaching, and leadership.</p>
       <div class="herobtns reveal">
         <a href="#projects" class="btn">View My Work</a>
         <a href="#" class="btn ghost cv-link">Download CV</a>
+      </div>
+      <div class="stats reveal">
+        <div class="card stat"><span class="mono-num" data-to="3.57" data-dec="2">3.57</span><span class="l">Current CGPA</span></div>
+        <div class="card stat"><span class="mono-num" data-to="5" data-dec="2">5.00</span><span class="l">SSC & HSC GPA</span></div>
+        <div class="card stat"><span class="mono-num" data-to="3" data-pre="+">+3</span><span class="l">Years teaching & leadership experience</span></div>
+        <div class="card stat"><span class="mono-num" data-to="7">7</span><span class="l">Roles held alongside a full BBA course load</span></div>
       </div>
     </div>
     <div class="reveal">
@@ -322,6 +347,12 @@ footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color
     <p class="sub reveal">The BA framework I practice through scenario-based exercises.</p>
     <div class="process-steps reveal" id="processSteps"></div>
     <div class="card step-detail reveal" id="stepDetail"></div>
+    <div class="card swot-card reveal" style="margin-top:20px">
+      <h3 style="margin:0 0 4px;font-size:18px">SWOT Analysis: My Excuse for Missing a Deadline</h3>
+      <p class="sub" style="margin:0 0 16px;font-size:14px">Every good analyst can justify anything with a 2x2 grid. Generate a new one.</p>
+      <div class="swot-grid" id="swotGrid"></div>
+      <button class="btn" id="swotBtn">Run analysis</button>
+    </div>
   </div>
 </section>
 
@@ -502,8 +533,9 @@ function renderPanel(cat){
   panelWrap.innerHTML=skillData[cat].map(([name,lvl])=>{
     const [label,cls,pct]=levelMeta[lvl];
     return `<div class="skill-row"><div class="top"><span class="name">${name}</span><span class="level ${cls}">${label}</span></div>
-      <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div></div>`;
+      <div class="bar-track"><div class="bar-fill" style="width:0" data-w="${pct}"></div></div></div>`;
   }).join('');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>panelWrap.querySelectorAll('.bar-fill').forEach(b=>b.style.width=b.dataset.w+'%')));
 }
 Object.keys(skillData).forEach((cat,i)=>{
   const tab=document.createElement('button');tab.className='skill-tab'+(i===0?' active':'');tab.textContent=cat;
@@ -539,7 +571,7 @@ contactForm.addEventListener('submit',async e=>{
     const res=await fetch(contactForm.action,{method:'POST',body:new FormData(contactForm),headers:{'Accept':'application/json'}});
     if(res.ok){
       contactMsg.style.color='var(--success)';contactMsg.textContent='Thanks — your message was sent. I\'ll get back to you soon.';
-      contactForm.reset();
+      contactForm.reset();confetti(innerWidth/2,innerHeight/2);
     }else{
       contactMsg.style.color='#c0392b';contactMsg.textContent='Something went wrong sending that — please email me directly instead.';
     }
@@ -549,6 +581,51 @@ contactForm.addEventListener('submit',async e=>{
   contactMsg.style.display='block';
   contactBtn.disabled=false;contactBtn.textContent='Send Message';
 });
+
+// ---- Fun layer ----
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function confetti(x,y){if(reduce)return;['🎉','✨','💛','📊','⭐','📈'].forEach((c,i)=>{for(let k=0;k<3;k++){const e=document.createElement('span');e.className='confetti';e.textContent=c;
+  e.style.left=x+'px';e.style.top=y+'px';e.style.setProperty('--dx',(Math.random()*300-150)+'px');e.style.setProperty('--dy',(Math.random()*-200-40)+'px');e.style.setProperty('--r',(Math.random()*720-360)+'deg');
+  document.body.appendChild(e);setTimeout(()=>e.remove(),1200);}});}
+// scroll progress
+const prog=document.getElementById('prog');
+addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-innerHeight;prog.style.width=(h>0?scrollY/h*100:0)+'%';},{passive:true});
+// rotating subtitle
+const tw=document.getElementById('typed'),phrases=['Banking & Finance','SQL & Data Analytics','Root Cause Hunter','Teacher & Team Lead'];let pi=0,ci=0,del=false;
+function tick(){const p=phrases[pi];ci+=del?-1:1;tw.textContent=p.slice(0,ci);let d=del?35:70;
+  if(!del&&ci===p.length){del=true;d=1400;}else if(del&&ci===0){del=false;pi=(pi+1)%phrases.length;d=300;}
+  setTimeout(tick,d);}
+if(!reduce){tw.textContent='';tick();}
+// count-up stats
+function countUp(el){const to=+el.dataset.to,dec=+(el.dataset.dec||0),pre=el.dataset.pre||'',t0=performance.now();
+  (function f(t){const k=Math.min((t-t0)/1400,1),v=to*(1-Math.pow(1-k,3));
+    el.textContent=pre+v.toFixed(dec).replace(/\B(?=(\d{3})+(?!\d))/g,',');if(k<1)requestAnimationFrame(f);})(t0);}
+const statIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){countUp(e.target);statIO.unobserve(e.target);}}),{threshold:.6});
+if(!reduce)document.querySelectorAll('.stat .mono-num').forEach(el=>statIO.observe(el));
+// 3D tilt on capability cards
+document.querySelectorAll('.cap-card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    c.style.transform=`perspective(700px) rotateX(${-y*8}deg) rotateY(${x*8}deg) translateY(-5px)`;});
+  c.addEventListener('mouseleave',()=>c.style.transform='');});
+// easter eggs: click the name or footer logo
+document.querySelector('.hero h1').style.cursor='pointer';
+document.querySelector('.hero h1').addEventListener('click',e=>confetti(e.clientX,e.clientY));
+document.querySelector('footer .wrap div').addEventListener('click',e=>confetti(e.clientX,e.clientY));
+// SWOT excuse generator
+const swot={
+ S:['I identified the problem faster than I could solve it.','My root cause analysis was extremely thorough.','I stayed highly stakeholder-aware (my mother texted, I replied).','I never once blamed the data.'],
+ W:['My time estimates assume no WiFi outages, power cuts, or naps.','5 Whys works better on other people\'s problems than my own.','I treat "final draft" as a rough first draft with more confidence.','My GROUP BY skills exceed my group project skills.'],
+ O:['A later deadline would unlock significant untapped potential (mine).','This delay leaves time for a much stronger recommendation slide.','Extra time reduces the risk of a second, worse delay later.','I can pilot a new personal productivity framework, starting tomorrow.'],
+ T:['Someone may notice this excuse followed a business framework.','Scope creep: the assignment kept being, technically, still due.','A competitor (my classmate) already submitted theirs.','My professor has seen a SWOT analysis before.']
+};
+const swotLabels={S:'Strengths',W:'Weaknesses',O:'Opportunities',T:'Threats'};
+const swotGrid=document.getElementById('swotGrid');
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function runSwot(){
+  swotGrid.innerHTML=Object.keys(swot).map(k=>`<div class="swot-cell pop"><span class="k">${swotLabels[k]}</span>${pick(swot[k])}</div>`).join('');
+}
+document.getElementById('swotBtn').addEventListener('click',e=>{runSwot();const r=e.target.getBoundingClientRect();if(Math.random()<0.15)confetti(r.left+r.width/2,r.top);});
+runSwot();
 </script>
 </body>
 </html>
