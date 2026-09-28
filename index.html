@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Kutub Bahar — Business Analyst | Banking & Finance | Data Analytics</title>
+<title>Kutub Bahar | 01522-133848 | Business Analyst · Banking & Finance</title>
 <meta name="description" content="Kutub Bahar — BBA student at University of Dhaka, building skills in Business Analysis, SQL and Data Analytics.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
   box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
 html{scroll-behavior:smooth;scroll-padding-top:70px;height:100%}
-body{height:100%;margin:0;font-family:Inter,system-ui,sans-serif;background-color:var(--bg);color:var(--text);transition:background .3s,color .3s;
+body{min-height:100%;margin:0;font-family:Inter,system-ui,sans-serif;background-color:var(--bg);color:var(--text);transition:background .3s,color .3s;
   background-image:repeating-linear-gradient(135deg, transparent, transparent 26px, color-mix(in srgb, var(--accent) 8%, transparent) 26px, color-mix(in srgb, var(--accent) 8%, transparent) 27px);
   background-attachment:fixed}
 :root[data-theme="dark"]{--bg:#0A0A0A;--card:#161412;--border:#2E2A22;--text:#F7F2E7;--text2:#D8D0BA;--muted:#8C8370}
@@ -176,6 +176,44 @@ footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color
   .grid.cols-2,.grid.cols-3,.grid.cols-4{grid-template-columns:1fr}
   .process-steps{flex-direction:column}
 }
+.now-card{padding:20px;cursor:pointer}
+.now-card:hover{border-color:var(--accent)}
+.now-card .lab{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;margin:14px 0 4px}
+.now-card h3{font-size:16px;margin:0 0 4px}
+.now-card .what{font-size:13.5px;color:var(--muted)}
+.now-more{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);font-size:13px;color:var(--text2);line-height:1.6}
+.now-card.open .now-more{display:block}
+.learn-card{perspective:1000px;cursor:pointer}
+.flip-inner{display:grid;transition:transform .6s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d}
+.learn-card.open .flip-inner{transform:rotateY(180deg)}
+.face{grid-area:1/1;padding:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:border-color .2s}
+.face.back{transform:rotateY(180deg)}
+.learn-card:hover .face,.learn-card:focus-visible .face{border-color:var(--accent)}
+.learn-card:focus-visible{outline:none}
+.hint{font-size:11.5px;color:var(--muted);margin-top:14px}
+.learn-top{display:flex;justify-content:space-between;align-items:center}
+.learn-card h3{margin:12px 0 14px;font-size:19px}
+.learn-meta{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-top:8px}
+.learn-note{font-size:13.5px;color:var(--text2);line-height:1.7}
+.learn-steps{list-style:none;margin:10px 0 0;padding:0}
+.learn-steps li{display:flex;gap:10px;padding:4px 0;color:var(--muted)}
+.learn-steps li.done{color:var(--text2)}
+.learn-steps li .ck{color:var(--accent);font-weight:800;width:14px}
+.theme-switch{position:relative;width:62px;height:32px;border-radius:999px;border:1px solid var(--border);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:0 8px;font-size:13px;flex-shrink:0}
+.theme-switch .ts-ic{position:relative;z-index:1;line-height:1;opacity:.5;transition:opacity .3s}
+:root:not([data-theme="dark"]) .theme-switch .ts-ic:first-child,:root[data-theme="dark"] .theme-switch .ts-ic:last-child{opacity:1}
+.ts-knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:var(--accent);transition:transform .3s cubic-bezier(.4,.2,.2,1)}
+:root[data-theme="dark"] .ts-knob{transform:translateX(30px)}
+.theme-switch:hover{border-color:var(--accent)}
+.navlinks a.open-pill,.mobilemenu a.open-pill{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:var(--card);font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;transition:border-color .2s}
+.navlinks a.open-pill::after{display:none}
+.navlinks a.open-pill:hover,.mobilemenu a.open-pill:hover{border-color:#3DBA6F}
+.pill-txt{display:inline-block;min-width:118px;text-align:left;transition:opacity .25s}
+@media(max-width:1080px){.navlinks{display:none}.hamburger{display:block}}
+.live{width:8px;height:8px;border-radius:50%;background:#3DBA6F;flex-shrink:0;animation:livepulse 1.8s infinite}
+@keyframes livepulse{0%{box-shadow:0 0 0 0 rgba(61,186,111,.6)}70%,100%{box-shadow:0 0 0 8px rgba(61,186,111,0)}}
+nav{transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 8px 24px -14px rgba(0,0,0,.55)}
 #prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:200}
 .typed::after{content:'|';margin-left:2px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
@@ -208,10 +246,11 @@ footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
+      <a href="#learning">Learning</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-      <a class="btn" href="#" id="cvBtn">Download CV</a>
+      <button class="theme-switch" id="themeToggle" role="switch" aria-checked="false" aria-label="Toggle dark mode"><span class="ts-ic">☀️</span><span class="ts-ic">🌙</span><span class="ts-knob"></span></button>
+      <a class="open-pill" href="#contact"><span class="live"></span><span class="pill-txt">Open to work</span></a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
   </div>
@@ -223,11 +262,12 @@ footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color
   <a href="#education"><span class="mm-ic">◈</span>Education</a>
   <a href="#experience"><span class="mm-ic">▤</span>Experience</a>
   <a href="#skills"><span class="mm-ic">◎</span>Skills</a>
+  <a href="#learning"><span class="mm-ic">↗</span>Learning</a>
   <a href="#projects"><span class="mm-ic">◇</span>Projects</a>
   <a href="#contact"><span class="mm-ic">✉</span>Contact</a>
   <div class="mm-foot">
     <button class="btn ghost" id="themeToggleMobile">Toggle Theme</button>
-    <a class="btn cv-link" href="#" style="justify-content:center">Download CV</a>
+    <a class="open-pill" href="#contact"><span class="live"></span><span class="pill-txt">Open to work</span></a>
   </div>
 </div>
 
@@ -332,6 +372,24 @@ footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color
   </div>
 </section>
 
+<section id="now">
+  <div class="wrap">
+    <div class="eyebrow reveal">Currently</div>
+    <h2 class="reveal">Currently At</h2>
+    <p class="sub reveal">Where I'm studying, teaching and leading right now. Tap a card for more.</p>
+    <div class="grid cols-4" id="nowGrid"></div>
+  </div>
+</section>
+
+<section id="learning" style="background:color-mix(in srgb, var(--card) 60%, var(--bg))">
+  <div class="wrap">
+    <div class="eyebrow reveal">Now Learning</div>
+    <h2 class="reveal">What I'm Learning Right Now</h2>
+    <p class="sub reveal">Live progress on what I'm studying. Tap a card to see my notes and next steps.</p>
+    <div class="grid cols-2" id="learnGrid"></div>
+  </div>
+</section>
+
 <section id="capabilities" style="background:color-mix(in srgb, var(--card) 60%, var(--bg))">
   <div class="wrap">
     <div class="eyebrow reveal">What I Do</div>
@@ -411,7 +469,8 @@ footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color
 // ---- Theme ----
 const root=document.documentElement;
 function setTheme(t){root.setAttribute('data-theme',t);localStorage.setItem('theme',t);
-  document.querySelectorAll('#themeToggle,#themeToggleMobile').forEach(b=>b.textContent=t==='dark'?'☀️':'🌙');}
+  document.getElementById('themeToggle').setAttribute('aria-checked',t==='dark');
+  document.getElementById('themeToggleMobile').textContent=t==='dark'?'☀️ Switch to light':'🌙 Switch to dark';}
 try{setTheme(localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));}catch(e){}
 document.getElementById('themeToggle').onclick=()=>setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
 document.getElementById('themeToggleMobile').onclick=()=>setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
@@ -448,12 +507,16 @@ document.querySelectorAll('.cv-link,#cvBtn').forEach(el=>{
   el.href=CV_URL;
 });
 
+// ---- Sticky nav shadow ----
+const navEl=document.querySelector('nav');
+addEventListener('scroll',()=>navEl.classList.toggle('scrolled',scrollY>10),{passive:true});
+
 // ---- Scroll reveal ----
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 // ---- Active nav link ----
-const sections=['about','education','experience','skills','projects','contact'];
+const sections=['about','education','experience','skills','learning','projects','contact'];
 const navA=document.querySelectorAll('.navlinks a[href^="#"], .mobilemenu a[href^="#"]');
 const secIO=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){navA.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}
@@ -550,6 +613,50 @@ Object.keys(skillData).forEach((cat,i)=>{
 });
 renderPanel(Object.keys(skillData)[0]);
 
+// ---- Currently learning (edit this list; progress is calculated from the steps) ----
+// step format: ['Step text', true]  true = done, false = not yet
+const learning=[
+ {title:'Correlated Subqueries',area:'SQL',
+  note:'A subquery that re-runs for every row of the outer query and can use that row\'s values. Great for questions like "which employees earn more than their own department\'s average?"',
+  steps:[['Understand how it differs from a normal subquery',true],['Use it with EXISTS / NOT EXISTS',false],['Compare each row to its own group average',false],['Rewrite one as a JOIN and compare the results',false]]},
+ {title:'Requirements Elicitation',area:'Business Analysis',
+  note:'Drawing out what stakeholders really need, using interviews, workshops, observation and surveys, then turning it into clear requirements.',
+  steps:[['Learn the main elicitation techniques',true],['Prepare interview questions for one stakeholder',false],['Run a mock elicitation session',false],['Turn the notes into clear requirements',false]]}
+];
+// ---- Currently at (edit this list) ----
+const currently=[
+ {icon:'◈',label:'Studying at',place:'University of Dhaka',what:'BBA · Banking & Insurance · 3rd year',more:'5th semester, 30th Batch.'},
+ {icon:'✎',label:'Teaching at',place:'10 Minute School English Centre',what:'English Instructor',more:'Conducting structured English instruction. Started June 5, 2026.'},
+ {icon:'◎',label:'Leading at',place:'BCB-71',what:'Head of Photography & Travel',more:'Leading photography and travel initiatives for the Banking Community of Bijoy 71 Hall.'},
+ {icon:'▤',label:'Keeping books at',place:'M/S Shajahan Store, Chattogram',what:'Bookkeeper',more:'Maintaining financial records, tracking income and expenses, and reconciling accounts.'}
+];
+function stagger(el,i){el.classList.add('reveal');el.style.transitionDelay=(i*90)+'ms';io.observe(el);}
+const nowGrid=document.getElementById('nowGrid');
+currently.forEach((c,i)=>{
+  const el=document.createElement('div');el.className='card now-card';el.tabIndex=0;
+  el.innerHTML=`<div class="icon">${c.icon}</div><div class="lab"><span class="dot"></span>${c.label}</div><h3>${c.place}</h3><div class="what">${c.what}</div><div class="now-more">${c.more}</div>`;
+  el.onclick=()=>el.classList.toggle('open');
+  el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.classList.toggle('open');}};
+  nowGrid.appendChild(el);stagger(el,i);
+});
+const learnGrid=document.getElementById('learnGrid');
+learning.forEach(l=>{
+  const done=l.steps.filter(x=>x[1]).length,pct=Math.round(done/l.steps.length*100);
+  const el=document.createElement('div');el.className='learn-card';el.tabIndex=0;el.setAttribute('role','button');
+  const li=l.steps.map(x=>`<li class="${x[1]?'done':''}"><span class="ck">${x[1]?'✓':'○'}</span>${x[0]}</li>`).join('');
+  el.innerHTML=`<div class="flip-inner">
+    <div class="card face front"><div class="learn-top"><span class="badge">${l.area}</span><span class="dot" title="Learning now"></span></div>
+      <h3>${l.title}</h3><div class="bar-track"><div class="bar-fill" style="width:0" data-w="${pct}"></div></div>
+      <div class="learn-meta"><span>${done} of ${l.steps.length} steps</span><span>${pct}%</span></div><div class="hint">Tap to flip for notes ↻</div></div>
+    <div class="card face back"><div class="learn-top"><span class="badge">${l.area}</span><span class="hint" style="margin:0">Tap to flip back ↻</span></div>
+      <h3>${l.title}</h3><div class="learn-note">${l.note}<ul class="learn-steps">${li}</ul></div></div></div>`;
+  el.onclick=()=>el.classList.toggle('open');
+  el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.classList.toggle('open');}};
+  learnGrid.appendChild(el);stagger(el,learnGrid.children.length-1);
+});
+const learnIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const b=e.target.querySelector('.bar-fill');b.style.width=b.dataset.w+'%';learnIO.unobserve(e.target);}}),{threshold:.4});
+document.querySelectorAll('.learn-card').forEach(c=>learnIO.observe(c));
+
 // ---- Experience timeline ----
 const exp=[
 {yr:'June 5, 2026 – Present',t:'English Instructor — 10 Minute School English Centre',more:'Conducting structured English instruction at 10 Minute School English Centre.'},
@@ -596,6 +703,11 @@ function confetti(x,y){if(reduce)return;['🎉','✨','💛','📊','⭐','📈'
 // scroll progress
 const prog=document.getElementById('prog');
 addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-innerHeight;prog.style.width=(h>0?scrollY/h*100:0)+'%';},{passive:true});
+// fun status pill: rotating quips + confetti on click
+const pillQuips=['Open to work','Powered by tea ☕','Ask me about SQL','Hire me, I insist'];let pq=0;
+const pillTxt=[...document.querySelectorAll('.pill-txt')];
+if(!reduce)setInterval(()=>{pq=(pq+1)%pillQuips.length;pillTxt.forEach(el=>{el.style.opacity=0;setTimeout(()=>{el.textContent=pillQuips[pq];el.style.opacity=1;},250);});},3200);
+document.querySelectorAll('.open-pill').forEach(a=>a.addEventListener('click',()=>{const r=a.getBoundingClientRect();confetti(r.left+r.width/2,r.top+r.height/2);}));
 // rotating subtitle
 const tw=document.getElementById('typed'),phrases=['Banking & Finance','SQL & Data Analytics','Root Cause Hunter','Teacher & Team Lead'];let pi=0,ci=0,del=false;
 function tick(){const p=phrases[pi];ci+=del?-1:1;tw.textContent=p.slice(0,ci);let d=del?35:70;
