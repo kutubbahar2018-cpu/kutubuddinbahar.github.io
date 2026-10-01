@@ -142,6 +142,13 @@ h2{font-size:clamp(24px,3.5vw,34px);margin:0 0 8px}
 .project-card p{color:var(--muted);font-size:14px;line-height:1.7;margin:0 0 14px}
 .tools{display:flex;gap:8px;flex-wrap:wrap}
 .tool{font-size:12px;background:var(--bg);border:1px solid var(--border);padding:4px 10px;border-radius:6px;color:var(--text2)}
+.project-card.featured{grid-column:1/-1;border-color:var(--accent);position:relative;box-shadow:0 14px 40px -20px var(--accent)}
+.feat-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;margin-bottom:10px}
+.feat-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 16px}
+.feat-stat{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.feat-stat b{display:block;font-family:Manrope,Inter,sans-serif;font-size:24px;color:var(--accent);line-height:1.1}
+.feat-stat span{font-size:12px;color:var(--muted)}
+.feat-hint{font-size:12px;color:var(--muted);margin-top:12px}
 .project-detail{display:none;margin-top:14px;padding-top:14px;border-top:1px dashed var(--border);font-size:13.5px;color:var(--text2);line-height:1.7}
 .project-detail.open{display:block}
 .project-detail b{color:var(--text)}
@@ -328,7 +335,6 @@ nav.scrolled{box-shadow:0 8px 24px -14px rgba(0,0,0,.55)}
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
-      <a href="#learning">Learning</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
       <button class="theme-switch" id="themeToggle" role="switch" aria-checked="false" aria-label="Toggle dark mode"><span class="ts-ic">☀️</span><span class="ts-ic">🌙</span><span class="ts-knob"></span></button>
@@ -344,7 +350,6 @@ nav.scrolled{box-shadow:0 8px 24px -14px rgba(0,0,0,.55)}
   <a href="#education"><span class="mm-ic">◈</span>Education</a>
   <a href="#experience"><span class="mm-ic">▤</span>Experience</a>
   <a href="#skills"><span class="mm-ic">◎</span>Skills</a>
-  <a href="#learning"><span class="mm-ic">↗</span>Learning</a>
   <a href="#projects"><span class="mm-ic">◇</span>Projects</a>
   <a href="#contact"><span class="mm-ic">✉</span>Contact</a>
   <div class="mm-foot">
@@ -460,15 +465,6 @@ nav.scrolled{box-shadow:0 8px 24px -14px rgba(0,0,0,.55)}
     <h2 class="reveal">Currently At</h2>
     <p class="sub reveal">Where I'm studying, teaching and leading right now. Tap a card for more.</p>
     <div class="grid cols-4" id="nowGrid"></div>
-  </div>
-</section>
-
-<section id="learning" style="background:color-mix(in srgb, var(--card) 60%, var(--bg))">
-  <div class="wrap">
-    <div class="eyebrow reveal">Now Learning</div>
-    <h2 class="reveal">What I'm Learning Right Now</h2>
-    <p class="sub reveal">Live progress on what I'm studying. Tap a card to see my notes and next steps.</p>
-    <div class="grid cols-2" id="learnGrid"></div>
   </div>
 </section>
 
@@ -688,7 +684,7 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.targe
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 // ---- Active nav link ----
-const sections=['about','education','experience','skills','learning','projects','contact'];
+const sections=['about','education','experience','skills','projects','contact'];
 const navA=document.querySelectorAll('.navlinks a[href^="#"], .mobilemenu a[href^="#"]');
 const secIO=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){navA.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}
@@ -729,7 +725,15 @@ const projects=[
   desc:'Independent research project comparing macroeconomic indicators across three countries over a 20-year period.',
   problem:'How do development trajectories differ across three distinct economies over two decades?',
   approach:'Compiled and compared macroeconomic indicators using World Bank data across the three countries.',
-  outcome:'Interpreted economic trends and presented findings in a structured research format.'}
+  outcome:'Interpreted economic trends and presented findings in a structured research format.'},
+ {title:'Business Analyst Job Market Analysis (SQL)',category:'SQL & Data',tools:['SQL','PostgreSQL','VS Code','GitHub','AI-assisted charts'],
+  desc:'SQL analysis of Business Analyst job postings: where the top-paying roles are, what the lowest-paying ones look like, and which skills appear in the highest salaries.',
+  problem:'What do Business Analyst job postings pay, where are they located, and which skills show up in the best-paid roles?',
+  approach:'Wrote PostgreSQL queries using joins across four tables (postings, companies, skills), CTEs, filtering and aggregation. Compared the highest and lowest salaries, counted skill demand, and documented the results with charts in a GitHub README.',
+  outcome:'Salaries ranged from about $30K to about $387K a year. SQL was the most requested skill (312 postings), ahead of Excel (226) and Tableau (212), and the top-paying posting also listed Python, R and big-data tools. The README states the limits of the analysis, including small samples.',
+  link:'https://github.com/kutubbahar2018-cpu/Sqp_project',
+  featured:true,
+  stats:[['312','postings asking for SQL'],['$387K','highest salary found'],['7','countries in the top 10']]}
 ];
 const cats=['All',...new Set(projects.map(p=>p.category))];
 const fWrap=document.getElementById('filters');
@@ -738,11 +742,13 @@ cats.forEach((c,i)=>{const b=document.createElement('button');b.className='filte
   fWrap.appendChild(b);});
 function renderProjects(cat){
   const grid=document.getElementById('projectGrid');grid.innerHTML='';
-  projects.filter(p=>cat==='All'||p.category===cat).forEach((p,idx)=>{
-    const el=document.createElement('div');el.className='card project-card';
-    el.innerHTML=`<div class="type">${p.category}</div><h3>${p.title}</h3><p>${p.desc}</p>
+  projects.filter(p=>cat==='All'||p.category===cat).sort((a,b)=>(b.featured?1:0)-(a.featured?1:0)).forEach((p,idx)=>{
+    const el=document.createElement('div');el.className='card project-card'+(p.featured?' featured':'');
+    el.innerHTML=`${p.featured?'<span class="feat-badge">★ Latest project</span>':''}<div class="type">${p.category}</div><h3>${p.title}</h3><p>${p.desc}</p>
+      ${p.stats?'<div class="feat-stats">'+p.stats.map(x=>'<div class="feat-stat"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('')+'</div>':''}
       <div class="tools">${p.tools.map(t=>'<span class="tool">'+t+'</span>').join('')}</div>
-      <div class="project-detail" id="pd${idx}"><b>Problem:</b> ${p.problem}<br><br><b>Approach:</b> ${p.approach}<br><br><b>Outcome:</b> ${p.outcome}</div>`;
+      <div class="project-detail" id="pd${idx}"><b>Problem:</b> ${p.problem}<br><br><b>Approach:</b> ${p.approach}<br><br><b>Outcome:</b> ${p.outcome}${p.link?'<br><br><a class="btn" href="'+p.link+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on GitHub →</a>':''}</div>`;
+    if(p.featured)el.querySelector('.project-detail').classList.add('open');
     el.onclick=()=>document.getElementById('pd'+idx).classList.toggle('open');
     grid.appendChild(el);
   });
@@ -789,16 +795,6 @@ const photoTab=document.createElement('button');photoTab.className='skill-tab';p
 photoTab.onclick=()=>document.getElementById('photos').scrollIntoView({behavior:'smooth'});
 tabWrap.appendChild(photoTab);
 
-// ---- Currently learning (edit this list; progress is calculated from the steps) ----
-// step format: ['Step text', true]  true = done, false = not yet
-const learning=[
- {title:'Correlated Subqueries',area:'SQL',
-  note:'A subquery that re-runs for every row of the outer query and can use that row\'s values. Great for questions like "which employees earn more than their own department\'s average?"',
-  steps:[['Understand how it differs from a normal subquery',true],['Use it with EXISTS / NOT EXISTS',false],['Compare each row to its own group average',false],['Rewrite one as a JOIN and compare the results',false]]},
- {title:'Requirements Elicitation',area:'Business Analysis',
-  note:'Drawing out what stakeholders really need, using interviews, workshops, observation and surveys, then turning it into clear requirements.',
-  steps:[['Learn the main elicitation techniques',true],['Prepare interview questions for one stakeholder',false],['Run a mock elicitation session',false],['Turn the notes into clear requirements',false]]}
-];
 // ---- Currently at (edit this list) ----
 const currently=[
  {icon:'◈',label:'Studying at',place:'University of Dhaka',what:'BBA · Banking & Insurance · 3rd year',more:'5th semester, 30th Batch.'},
@@ -815,23 +811,6 @@ currently.forEach((c,i)=>{
   el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.classList.toggle('open');}};
   nowGrid.appendChild(el);stagger(el,i);
 });
-const learnGrid=document.getElementById('learnGrid');
-learning.forEach(l=>{
-  const done=l.steps.filter(x=>x[1]).length,pct=Math.round(done/l.steps.length*100);
-  const el=document.createElement('div');el.className='learn-card';el.tabIndex=0;el.setAttribute('role','button');
-  const li=l.steps.map(x=>`<li class="${x[1]?'done':''}"><span class="ck">${x[1]?'✓':'○'}</span>${x[0]}</li>`).join('');
-  el.innerHTML=`<div class="flip-inner">
-    <div class="card face front"><div class="learn-top"><span class="badge">${l.area}</span><span class="dot" title="Learning now"></span></div>
-      <h3>${l.title}</h3><div class="bar-track"><div class="bar-fill" style="width:0" data-w="${pct}"></div></div>
-      <div class="learn-meta"><span>${done} of ${l.steps.length} steps</span><span>${pct}%</span></div><div class="hint">Tap to flip for notes ↻</div></div>
-    <div class="card face back"><div class="learn-top"><span class="badge">${l.area}</span><span class="hint" style="margin:0">Tap to flip back ↻</span></div>
-      <h3>${l.title}</h3><div class="learn-note">${l.note}<ul class="learn-steps">${li}</ul></div></div></div>`;
-  el.onclick=()=>el.classList.toggle('open');
-  el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.classList.toggle('open');}};
-  learnGrid.appendChild(el);stagger(el,learnGrid.children.length-1);
-});
-const learnIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const b=e.target.querySelector('.bar-fill');b.style.width=b.dataset.w+'%';learnIO.unobserve(e.target);}}),{threshold:.4});
-document.querySelectorAll('.learn-card').forEach(c=>learnIO.observe(c));
 
 // ---- Photography (edit this list; put the image files in the same folder as index.html) ----
 const photos=[
