@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "title": "Macroeconomic Development Analysis — Costa Rica, Chile & Poland",
+      "category": "Research",
+      "tools": ["World Bank Data", "Excel", "Research & Analysis"],
+      "desc": "Independent research project comparing macroeconomic indicators across three countries over a 20-year period.",
+      "problem": "How do development trajectories differ across three distinct economies over two decades?",
+      "approach": "Compiled and compared macroeconomic indicators using World Bank data across the three countries.",
+      "outcome": "Interpreted economic trends and presented findings in a structured research format.",
+      "link": "",
+      "featured": false,
+      "stats": []
+    },
+    {
+      "title": "Business Analyst Job Market Analysis (SQL)",
+      "category": "SQL & Data",
+      "tools": ["SQL", "PostgreSQL", "VS Code", "GitHub", "AI-assisted charts"],
+      "desc": "SQL analysis of Business Analyst job postings: where the top-paying roles are, what the lowest-paying ones look like, and which skills appear in the highest salaries.",
+      "problem": "What do Business Analyst job postings pay, where are they located, and which skills show up in the best-paid roles?",
+      "approach": "Wrote PostgreSQL queries using joins across four tables (postings, companies, skills), CTEs, filtering and aggregation. Compared the highest and lowest salaries, counted skill demand, and documented the results with charts in a GitHub README.",
+      "outcome": "Salaries ranged from about $30K to about $387K a year. SQL was the most requested skill (312 postings), ahead of Excel (226) and Tableau (212), and the top-paying posting also listed Python, R and big-data tools. The README states the limits of the analysis, including small samples.",
+      "link": "https://github.com/kutubbahar2018-cpu/Sqp_project",
+      "featured": true,
+      "stats": [
+        {"value": "312", "label": "postings asking for SQL"},
+        {"value": "$387K", "label": "highest salary found"},
+        {"value": "7", "label": "countries in the top 10"}
+      ]
+    }
+  ]
+}
