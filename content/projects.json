@@ -3,8 +3,12 @@
     {
       "title": "Macroeconomic Development Analysis — Costa Rica, Chile & Poland",
       "category": "Research",
-      "tools": ["World Bank Data", "Excel", "Research & Analysis"],
       "desc": "Independent research project comparing macroeconomic indicators across three countries over a 20-year period.",
+      "tools": [
+        "World Bank Data",
+        "Excel",
+        "Research & Analysis"
+      ],
       "problem": "How do development trajectories differ across three distinct economies over two decades?",
       "approach": "Compiled and compared macroeconomic indicators using World Bank data across the three countries.",
       "outcome": "Interpreted economic trends and presented findings in a structured research format.",
@@ -15,18 +19,69 @@
     {
       "title": "Business Analyst Job Market Analysis (SQL)",
       "category": "SQL & Data",
-      "tools": ["SQL", "PostgreSQL", "VS Code", "GitHub", "AI-assisted charts"],
       "desc": "SQL analysis of Business Analyst job postings: where the top-paying roles are, what the lowest-paying ones look like, and which skills appear in the highest salaries.",
+      "tools": [
+        "SQL",
+        "PostgreSQL",
+        "VS Code",
+        "GitHub",
+        "AI-assisted charts"
+      ],
       "problem": "What do Business Analyst job postings pay, where are they located, and which skills show up in the best-paid roles?",
       "approach": "Wrote PostgreSQL queries using joins across four tables (postings, companies, skills), CTEs, filtering and aggregation. Compared the highest and lowest salaries, counted skill demand, and documented the results with charts in a GitHub README.",
       "outcome": "Salaries ranged from about $30K to about $387K a year. SQL was the most requested skill (312 postings), ahead of Excel (226) and Tableau (212), and the top-paying posting also listed Python, R and big-data tools. The README states the limits of the analysis, including small samples.",
       "link": "https://github.com/kutubbahar2018-cpu/Sqp_project",
       "featured": true,
       "stats": [
-        {"value": "312", "label": "postings asking for SQL"},
-        {"value": "$387K", "label": "highest salary found"},
-        {"value": "7", "label": "countries in the top 10"}
+        {
+          "value": "312",
+          "label": "postings asking for SQL"
+        },
+        {
+          "value": "$387K",
+          "label": "highest salary found"
+        },
+        {
+          "value": "7",
+          "label": "countries in the top 10"
+        }
       ]
+    },
+    {
+      "title": "Personal Portfolio Website",
+      "category": "Web & Tools",
+      "desc": "A responsive portfolio presenting my education, experience, skills and projects, with dark/light mode, interactive sections and a working contact form. Built through AI-assisted (\"vibe\") coding and hosted free on GitHub Pages.",
+      "tools": [
+        "Claude (AI-assisted)",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "GitHub Pages"
+      ],
+      "problem": "How can a student present analyst-style work professionally without a developer or paid hosting?",
+      "approach": "Defined the structure, content and design direction, used Claude to generate and refine the code, tested it on desktop and mobile, and deployed it through GitHub Pages.\nOutcome: A live site with all sections working and a contact form that delivers messages to my email.",
+      "outcome": "A live, mobile-friendly portfolio with all sections working and a contact form that delivers messages straight to my email.",
+      "link": "https://github.com/kutubbahar2018-cpu/kutubuddinbahar.github.io",
+      "featured": false,
+      "stats": []
+    },
+    {
+      "title": "No-Code Content Management System for My Portfolio",
+      "category": "Web & Tools",
+      "desc": "A browser-based editor that lets me update my portfolio (experience, projects, skills, photos and profile picture) from simple forms instead of editing code.",
+      "tools": [
+        "Claude (AI-assisted)",
+        "Sveltia CMS",
+        "JSON",
+        "GitHub",
+        "GitHub Pages"
+      ],
+      "problem": "All my content was hard-coded in the page, so every small update meant editing code.",
+      "approach": "Moved the content into JSON data files, configured the CMS forms, and connected it to GitHub with a limited-permission access token. I debugged real deployment issues along the way: wrong folder paths, an image-path bug, and caching delays.",
+      "outcome": "Every change I save in the editor is committed to GitHub and republished automatically, with zoom and position controls for my profile photo.",
+      "link": "https://github.com/kutubbahar2018-cpu/kutubuddinbahar.github.io",
+      "featured": true,
+      "stats": []
     }
   ]
 }
