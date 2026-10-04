@@ -329,7 +329,7 @@ nav.scrolled{box-shadow:0 8px 24px -14px rgba(0,0,0,.55)}
 <div id="prog"></div>
 <nav>
   <div class="wrap navrow">
-    <a href="#top" class="brand"><img id="navPhoto" src="IMG-20251022-WA0056~5.jpg" alt="Kutub Bahar" style="width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:center 20%;display:block"> <span id="navName">Kutub Bahar</span></a>
+    <a href="#top" class="brand"><span style="width:34px;height:34px;border-radius:50%;overflow:hidden;display:block;flex-shrink:0"><img id="navPhoto" src="IMG-20251022-WA0056~5.jpg" alt="Kutub Bahar" style="width:100%;height:100%;object-fit:cover;object-position:50% 20%;transform-origin:50% 20%;display:block"></span> <span id="navName">Kutub Bahar</span></a>
     <div class="navlinks" id="navlinks">
       <a href="#about">About</a>
       <a href="#education">Education</a>
@@ -643,6 +643,9 @@ await Promise.all(['settings','experience','currently','projects','skills','phot
 }));
 document.getElementById('heroDesc').textContent=D.settings.heroDescription;
 if(D.settings.navName){document.getElementById('navName').textContent=D.settings.navName;document.getElementById('navPhoto').alt=D.settings.navName;}
+{const np=document.getElementById('navPhoto'),px=D.settings.navPhotoX,py=D.settings.navPhotoY,pz=D.settings.navPhotoZoom;
+  const X=(px===undefined||px==='')?50:Number(px),Y=(py===undefined||py==='')?20:Number(py),Z=(pz===undefined||pz==='')?1:Number(pz);
+  np.style.objectPosition=X+'% '+Y+'%';np.style.transformOrigin=X+'% '+Y+'%';np.style.transform='scale('+Z+')';}
 if(D.settings.navPhoto){document.getElementById('navPhoto').src=String(D.settings.navPhoto).replace(/^\/+/,'');}
 // ---- Theme ----
 const root=document.documentElement;
