@@ -14,6 +14,8 @@ collections:
         label: "Settings (intro text & CV)"
         file: "content/settings.json"
         fields:
+          - { label: "Top-left name (next to the small photo)", name: navName, widget: string, required: false }
+          - { label: "Top-left small photo", name: navPhoto, widget: image, required: false }
           - { label: "Hero intro paragraph", name: heroDescription, widget: text }
           - { label: "CV file name (upload the PDF to the repo root, then type its name)", name: cvFile, widget: string }
 
