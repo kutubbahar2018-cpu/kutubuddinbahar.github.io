@@ -1,19 +1,137 @@
 {
   "categories": [
-    {"name": "Business Analysis", "skills": [
-      {"name": "Stakeholder Analysis", "level": "2"}, {"name": "Problem Identification", "level": "2"},
-      {"name": "Root Cause Analysis", "level": "2"}, {"name": "5 Whys", "level": "3"}, {"name": "Power–Interest Matrix", "level": "1"}]},
-    {"name": "SQL & Data", "skills": [
-      {"name": "Filtering & Sorting", "level": "3"}, {"name": "SQL Querying", "level": "2"}, {"name": "Aggregation / GROUP BY", "level": "2"},
-      {"name": "JOINs", "level": "2"}, {"name": "HAVING", "level": "1"}, {"name": "Subqueries", "level": "1"}, {"name": "PostgreSQL", "level": "2"}]},
-    {"name": "Business & Finance", "skills": [
-      {"name": "Bookkeeping", "level": "3"}, {"name": "Report Writing", "level": "3"}, {"name": "Research & Analysis", "level": "3"},
-      {"name": "Data Interpretation", "level": "2"}, {"name": "Banking & Financial Services", "level": "2"}]},
-    {"name": "Leadership & Communication", "skills": [
-      {"name": "Teaching & Mentoring", "level": "3"}, {"name": "Public Speaking", "level": "3"},
-      {"name": "Team Leadership", "level": "3"}, {"name": "Event Coordination", "level": "3"}]},
-    {"name": "Tools", "skills": [
-      {"name": "PowerPoint", "level": "3"}, {"name": "Word", "level": "3"}, {"name": "Google Workspace", "level": "3"},
-      {"name": "Canva", "level": "3"}, {"name": "Excel", "level": "2"}]}
+    {
+      "name": "Business Analysis",
+      "skills": [
+        {
+          "name": "Stakeholder Analysis",
+          "level": "2"
+        },
+        {
+          "name": "Problem Identification",
+          "level": "2"
+        },
+        {
+          "name": "Root Cause Analysis",
+          "level": "2"
+        },
+        {
+          "name": "5 Whys",
+          "level": "3"
+        },
+        {
+          "name": "Power–Interest Matrix",
+          "level": "1"
+        }
+      ]
+    },
+    {
+      "name": "SQL & Data",
+      "skills": [
+        {
+          "name": "Filtering & Sorting",
+          "level": "3"
+        },
+        {
+          "name": "SQL Querying",
+          "level": "3"
+        },
+        {
+          "name": "Aggregation / GROUP BY",
+          "level": "3"
+        },
+        {
+          "name": "JOINs",
+          "level": "3"
+        },
+        {
+          "name": "HAVING",
+          "level": "3"
+        },
+        {
+          "name": "Subqueries",
+          "level": "3"
+        },
+        {
+          "name": "PostgreSQL",
+          "level": "2"
+        },
+        {
+          "name": "CTEs",
+          "level": "2"
+        }
+      ]
+    },
+    {
+      "name": "Business & Finance",
+      "skills": [
+        {
+          "name": "Bookkeeping",
+          "level": "3"
+        },
+        {
+          "name": "Report Writing",
+          "level": "3"
+        },
+        {
+          "name": "Research & Analysis",
+          "level": "3"
+        },
+        {
+          "name": "Data Interpretation",
+          "level": "2"
+        },
+        {
+          "name": "Banking & Financial Services",
+          "level": "2"
+        }
+      ]
+    },
+    {
+      "name": "Leadership & Communication",
+      "skills": [
+        {
+          "name": "Teaching & Mentoring",
+          "level": "3"
+        },
+        {
+          "name": "Public Speaking",
+          "level": "3"
+        },
+        {
+          "name": "Team Leadership",
+          "level": "3"
+        },
+        {
+          "name": "Event Coordination",
+          "level": "3"
+        }
+      ]
+    },
+    {
+      "name": "Tools",
+      "skills": [
+        {
+          "name": "PowerPoint",
+          "level": "3"
+        },
+        {
+          "name": "Word",
+          "level": "3"
+        },
+        {
+          "name": "Google Workspace",
+          "level": "3"
+        },
+        {
+          "name": "Canva",
+          "level": "3"
+        },
+        {
+          "name": "Excel",
+          "level": "2"
+        }
+      ]
+    }
   ]
 }
