@@ -787,11 +787,11 @@ currently.forEach((c,i)=>{
 });
 
 // ---- Photography (edit this list; put the image files in the same folder as index.html) ----
-const photos=D.photos.items.map(x=>({src:x.image,cap:x.caption||''}));
+const photos=D.photos.items.filter(x=>x.image).map(x=>({src:String(x.image).replace(/^\/+/,''),cap:x.caption||''}));
 // shuffle the rest: a different order on every visit
 for(let i=photos.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[photos[i],photos[j]]=[photos[j],photos[i]];}
 // the photo that always comes first (shown large). Change the filename to pick another one.
-const featuredPhoto=D.photos.featured;
+const featuredPhoto=String(D.photos.featured||'').replace(/^\/+/,'');
 const fi=photos.findIndex(x=>x.src===featuredPhoto);if(fi>0)photos.unshift(photos.splice(fi,1)[0]);
 const photoGrid=document.getElementById('photoGrid'),lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbCap=document.getElementById('lbCap'),flashEl=document.getElementById('flash');
 let pcur=0;
