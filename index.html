@@ -366,7 +366,7 @@ nav.scrolled{box-shadow:0 8px 24px -14px rgba(0,0,0,.55)}
       <h1 class="reveal">Md Kutub Uddin Bahar</h1>
       <div class="role reveal">Aspiring Business Analyst</div>
       <div class="role reveal typed" id="typed" style="font-size:14px;color:var(--muted);font-weight:600;margin-top:-8px">Banking & Finance · Data Analytics</div>
-      <p class="desc reveal">BBA student at the University of Dhaka (Banking & Insurance), building practical Business Analysis and SQL skills through self-directed study and applied research — with a background in financial record-keeping, teaching, and leadership.</p>
+      <p class="desc reveal" id="heroDesc">BBA student at the University of Dhaka (Banking & Insurance), building practical Business Analysis and SQL skills through self-directed study and applied research — with a background in financial record-keeping, teaching, and leadership.</p>
       <div class="herobtns reveal">
         <a href="#projects" class="btn">View My Work</a>
         <a href="#" class="btn ghost cv-link">Download CV</a>
@@ -634,6 +634,14 @@ nav.scrolled{box-shadow:0 8px 24px -14px rgba(0,0,0,.55)}
 </footer>
 
 <script>
+(async function(){
+// ---- Load editable content (managed by the CMS at /admin) ----
+const D={};
+await Promise.all(['settings','experience','currently','projects','skills','photos'].map(async n=>{
+  const r=await fetch('content/'+n+'.json?v='+Date.now());
+  D[n]=await r.json();
+}));
+document.getElementById('heroDesc').textContent=D.settings.heroDescription;
 // ---- Theme ----
 const root=document.documentElement;
 function setTheme(t){root.setAttribute('data-theme',t);localStorage.setItem('theme',t);
@@ -670,7 +678,7 @@ mmBackdrop.onclick=closeMenu;
 mm.querySelectorAll('a').forEach(a=>a.onclick=closeMenu);
 
 // ---- CV link (configure here) ----
-const CV_URL="MD_KUTUB_UDDIN_BAHAR-_CV.pdf"; // matches your uploaded CV filename
+const CV_URL=D.settings.cvFile;
 document.querySelectorAll('.cv-link,#cvBtn').forEach(el=>{
   el.href=CV_URL;
 });
@@ -720,21 +728,7 @@ function showStep(i){
 showStep(0);
 
 // ---- Projects (data-driven) ----
-const projects=[
- {title:'Macroeconomic Development Analysis — Costa Rica, Chile & Poland',category:'Research',tools:['World Bank Data','Excel','Research & Analysis'],
-  desc:'Independent research project comparing macroeconomic indicators across three countries over a 20-year period.',
-  problem:'How do development trajectories differ across three distinct economies over two decades?',
-  approach:'Compiled and compared macroeconomic indicators using World Bank data across the three countries.',
-  outcome:'Interpreted economic trends and presented findings in a structured research format.'},
- {title:'Business Analyst Job Market Analysis (SQL)',category:'SQL & Data',tools:['SQL','PostgreSQL','VS Code','GitHub','AI-assisted charts'],
-  desc:'SQL analysis of Business Analyst job postings: where the top-paying roles are, what the lowest-paying ones look like, and which skills appear in the highest salaries.',
-  problem:'What do Business Analyst job postings pay, where are they located, and which skills show up in the best-paid roles?',
-  approach:'Wrote PostgreSQL queries using joins across four tables (postings, companies, skills), CTEs, filtering and aggregation. Compared the highest and lowest salaries, counted skill demand, and documented the results with charts in a GitHub README.',
-  outcome:'Salaries ranged from about $30K to about $387K a year. SQL was the most requested skill (312 postings), ahead of Excel (226) and Tableau (212), and the top-paying posting also listed Python, R and big-data tools. The README states the limits of the analysis, including small samples.',
-  link:'https://github.com/kutubbahar2018-cpu/Sqp_project',
-  featured:true,
-  stats:[['312','postings asking for SQL'],['$387K','highest salary found'],['7','countries in the top 10']]}
-];
+const projects=D.projects.items.map(p=>({...p,tools:p.tools||[],stats:(p.stats&&p.stats.length)?p.stats.map(x=>[x.value,x.label]):undefined}));
 const cats=['All',...new Set(projects.map(p=>p.category))];
 const fWrap=document.getElementById('filters');
 cats.forEach((c,i)=>{const b=document.createElement('button');b.className='filter-btn'+(i===0?' active':'');b.textContent=c;
@@ -757,23 +751,8 @@ renderProjects('All');
 
 // ---- Skills ----
 // level: 1=Learning, 2=Practicing, 3=Comfortable
-const skillData={
- 'Business Analysis':[
-   ['Stakeholder Analysis',2],['Problem Identification',2],['Root Cause Analysis',2],['5 Whys',3],['Power–Interest Matrix',1]
- ],
- 'SQL & Data':[
-   ['Filtering & Sorting',3],['SQL Querying',2],['Aggregation / GROUP BY',2],['JOINs',2],['HAVING',1],['Subqueries',1],['PostgreSQL',2]
- ],
- 'Business & Finance':[
-   ['Bookkeeping',3],['Report Writing',3],['Research & Analysis',3],['Data Interpretation',2],['Banking & Financial Services',2]
- ],
- 'Leadership & Communication':[
-   ['Teaching & Mentoring',3],['Public Speaking',3],['Team Leadership',3],['Event Coordination',3]
- ],
- 'Tools':[
-   ['PowerPoint',3],['Word',3],['Google Workspace',3],['Canva',3],['Excel',2]
- ]
-};
+const skillData={};
+D.skills.categories.forEach(c=>{skillData[c.name]=c.skills.map(k=>[k.name,Number(k.level)]);});
 const levelMeta={1:['Learning','level-learning',33],2:['Practicing','level-practicing',66],3:['Comfortable','level-comfortable',100]};
 const tabWrap=document.getElementById('skillTabs'),panelWrap=document.getElementById('skillPanels');
 function renderPanel(cat){
@@ -796,12 +775,7 @@ photoTab.onclick=()=>document.getElementById('photos').scrollIntoView({behavior:
 tabWrap.appendChild(photoTab);
 
 // ---- Currently at (edit this list) ----
-const currently=[
- {icon:'◈',label:'Studying at',place:'University of Dhaka',what:'BBA · Banking & Insurance · 3rd year',more:'5th semester, 30th Batch.'},
- {icon:'✎',label:'Teaching at',place:'10 Minute School English Centre',what:'English Instructor',more:'Conducting structured English instruction. Started June 5, 2026.'},
- {icon:'◎',label:'Leading at',place:'BCB-71',what:'Head of Photography & Travel',more:'Leading photography and travel initiatives for the Banking Community of Bijoy 71 Hall.'},
- {icon:'▤',label:'Keeping books at',place:'M/S Shajahan Store, Chattogram',what:'Bookkeeper',more:'Maintaining financial records, tracking income and expenses, and reconciling accounts.'}
-];
+const currently=D.currently.items.map(c=>({icon:c.icon,label:c.label,place:c.place,what:c.what,more:c.more}));
 function stagger(el,i){el.classList.add('reveal');el.style.transitionDelay=(i*90)+'ms';io.observe(el);}
 const nowGrid=document.getElementById('nowGrid');
 currently.forEach((c,i)=>{
@@ -813,18 +787,11 @@ currently.forEach((c,i)=>{
 });
 
 // ---- Photography (edit this list; put the image files in the same folder as index.html) ----
-const photos=[
- {src:'Pic1.jpg',cap:''},
- {src:'pic2.jpg',cap:''},
- {src:'pic3.jpg',cap:''},
- {src:'pic4.jpg',cap:''},
- {src:'pic5.jpg',cap:''},
- {src:'pic6.jpg',cap:''}
-];
+const photos=D.photos.items.map(x=>({src:x.image,cap:x.caption||''}));
 // shuffle the rest: a different order on every visit
 for(let i=photos.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[photos[i],photos[j]]=[photos[j],photos[i]];}
 // the photo that always comes first (shown large). Change the filename to pick another one.
-const featuredPhoto='pic3.jpg';
+const featuredPhoto=D.photos.featured;
 const fi=photos.findIndex(x=>x.src===featuredPhoto);if(fi>0)photos.unshift(photos.splice(fi,1)[0]);
 const photoGrid=document.getElementById('photoGrid'),lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbCap=document.getElementById('lbCap'),flashEl=document.getElementById('flash');
 let pcur=0;
@@ -849,15 +816,7 @@ document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return
   if(e.key==='Escape')lb.classList.remove('open');else if(e.key==='ArrowRight')stepPhoto(1);else if(e.key==='ArrowLeft')stepPhoto(-1);});
 
 // ---- Experience timeline ----
-const exp=[
-{yr:'June 5, 2026 – Present',t:'English Instructor — 10 Minute School English Centre',more:'Conducting structured English instruction at 10 Minute School English Centre.'},
-  {yr:'2025 – Present',t:'Head of Photography & Travel — BCB-71',more:'Led photography and travel initiatives for the Banking Community of Bijoy 71 Hall; organized and coordinated group events and documentation efforts.'},
- {yr:'2024 – 2025',t:'Head of Department – English — ExcelBiz, Dhaka',more:'Led the English department, overseeing curriculum delivery and instructional quality; coordinated with instructors and adapted teaching approaches to student needs.'},
- {yr:'2023 – 2024',t:'English Instructor — ExcelBiz, Shwapno Dhabi Dhaka',more:'Conducted structured English instruction, identified learning gaps through observation and assessment, and adapted methods to individual student needs.'},
- {yr:'2023 – 2024',t:'Academic Content Contributor — Shwapno Dhabi Publications',more:'Contributed to English grammar content for HSC-level learners; developed exercises and reviewed material for clarity (Admission Written Book, HSC Academic Practice Book).'},
- {yr:'Ongoing',t:'Bookkeeper — M/S Shajahan Store, Chattogram',more:'Maintained financial records and transaction logs; tracked income and expenses and reconciled accounts on a regular basis; supported basic financial reporting.'},
- {yr:'Volunteering',t:'Flood Relief Volunteer',more:'Helped raise approximately BDT 52,000 in flood relief funds and helped organize, manage, and dispatch relief goods to roughly 150 affected families.'}
-];
+const exp=D.experience.items.map(e=>({yr:e.period,t:e.title,more:e.details}));
 const expWrap=document.getElementById('expTimeline');
 exp.forEach(e=>{const el=document.createElement('div');el.className='tl-item';
   el.innerHTML=`<div class="yr">${e.yr}</div><h4>${e.t}</h4><div class="more">${e.more}</div>`;
@@ -996,6 +955,7 @@ function runSwot(){
 }
 document.getElementById('swotBtn').addEventListener('click',e=>{runSwot();const r=e.target.getBoundingClientRect();if(Math.random()<0.15)confetti(r.left+r.width/2,r.top);});
 runSwot();
+})();
 </script>
 </body>
 </html>
