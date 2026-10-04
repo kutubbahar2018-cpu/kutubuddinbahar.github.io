@@ -1,0 +1,8 @@
+{
+  "items": [
+    {"icon": "◈", "label": "Studying at", "place": "University of Dhaka", "what": "BBA · Banking & Insurance · 3rd year", "more": "5th semester, 30th Batch."},
+    {"icon": "✎", "label": "Teaching at", "place": "10 Minute School English Centre", "what": "English Instructor", "more": "Conducting structured English instruction. Started June 5, 2026."},
+    {"icon": "◎", "label": "Leading at", "place": "BCB-71", "what": "Head of Photography & Travel", "more": "Leading photography and travel initiatives for the Banking Community of Bijoy 71 Hall."},
+    {"icon": "▤", "label": "Keeping books at", "place": "M/S Shajahan Store, Chattogram", "what": "Bookkeeper", "more": "Maintaining financial records, tracking income and expenses, and reconciling accounts."}
+  ]
+}
