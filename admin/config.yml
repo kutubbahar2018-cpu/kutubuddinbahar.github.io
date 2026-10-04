@@ -1,0 +1,109 @@
+backend:
+  name: github
+  repo: kutubbahar2018-cpu/kutubuddinbahar.github.io
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: site
+    label: "Portfolio Content"
+    files:
+      - name: settings
+        label: "Settings (intro text & CV)"
+        file: "content/settings.json"
+        fields:
+          - { label: "Hero intro paragraph", name: heroDescription, widget: text }
+          - { label: "CV file name (upload the PDF to the repo root, then type its name)", name: cvFile, widget: string }
+
+      - name: experience
+        label: "Experience"
+        file: "content/experience.json"
+        fields:
+          - label: "Items (newest first)"
+            name: items
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Period", name: period, widget: string }
+              - { label: "Title", name: title, widget: string }
+              - { label: "Details", name: details, widget: text }
+
+      - name: currently
+        label: "Currently At"
+        file: "content/currently.json"
+        fields:
+          - label: "Cards"
+            name: items
+            widget: list
+            summary: "{{fields.place}}"
+            fields:
+              - { label: "Icon (single symbol)", name: icon, widget: string }
+              - { label: "Label (e.g. Studying at)", name: label, widget: string }
+              - { label: "Place", name: place, widget: string }
+              - { label: "What", name: what, widget: string }
+              - { label: "More (shown on tap)", name: more, widget: text }
+
+      - name: projects
+        label: "Projects"
+        file: "content/projects.json"
+        fields:
+          - label: "Projects"
+            name: items
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: title, widget: string }
+              - { label: "Category", name: category, widget: string }
+              - { label: "Short description", name: desc, widget: text }
+              - { label: "Tools", name: tools, widget: list, field: { label: Tool, name: tool, widget: string } }
+              - { label: "Problem", name: problem, widget: text }
+              - { label: "Approach", name: approach, widget: text }
+              - { label: "Outcome", name: outcome, widget: text }
+              - { label: "Link (optional, e.g. GitHub)", name: link, widget: string, required: false }
+              - { label: "Featured (large card at top)", name: featured, widget: boolean, default: false }
+              - label: "Headline stats (optional)"
+                name: stats
+                widget: list
+                required: false
+                fields:
+                  - { label: "Value", name: value, widget: string }
+                  - { label: "Label", name: label, widget: string }
+
+      - name: skills
+        label: "Skills"
+        file: "content/skills.json"
+        fields:
+          - label: "Categories"
+            name: categories
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Category name", name: name, widget: string }
+              - label: "Skills"
+                name: skills
+                widget: list
+                summary: "{{fields.name}} ({{fields.level}})"
+                fields:
+                  - { label: "Skill", name: name, widget: string }
+                  - label: "Level"
+                    name: level
+                    widget: select
+                    options:
+                      - { label: "Learning", value: "1" }
+                      - { label: "Practicing", value: "2" }
+                      - { label: "Comfortable", value: "3" }
+
+      - name: photos
+        label: "Photography"
+        file: "content/photos.json"
+        fields:
+          - { label: "Featured photo (file name that always shows first & large)", name: featured, widget: string }
+          - label: "Photos"
+            name: items
+            widget: list
+            summary: "{{fields.image}}"
+            fields:
+              - { label: "Image", name: image, widget: image }
+              - { label: "Caption (optional)", name: caption, widget: string, required: false }
