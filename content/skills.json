@@ -132,6 +132,35 @@
           "level": "2"
         }
       ]
+    },
+    {
+      "name": "Web & AI-Assisted Building",
+      "skills": [
+        {
+          "name": "AI-Assisted Development",
+          "level": "2"
+        },
+        {
+          "name": "GitHub & GitHub Pages",
+          "level": "2"
+        },
+        {
+          "name": "Content Management (Sveltia CMS)",
+          "level": "1"
+        },
+        {
+          "name": "JSON Data Files",
+          "level": "1"
+        },
+        {
+          "name": "Debugging Deployment Issues",
+          "level": "2"
+        },
+        {
+          "name": "HTML / CSS / JavaScript",
+          "level": "1"
+        }
+      ]
     }
   ]
 }
