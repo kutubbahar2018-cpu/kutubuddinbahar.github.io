@@ -1,22 +1,6 @@
 {
   "items": [
     {
-      "title": "Macroeconomic Development Analysis — Costa Rica, Chile & Poland",
-      "category": "Research",
-      "desc": "Independent research project comparing macroeconomic indicators across three countries over a 20-year period.",
-      "tools": [
-        "World Bank Data",
-        "Excel",
-        "Research & Analysis"
-      ],
-      "problem": "How do development trajectories differ across three distinct economies over two decades?",
-      "approach": "Compiled and compared macroeconomic indicators using World Bank data across the three countries.",
-      "outcome": "Interpreted economic trends and presented findings in a structured research format.",
-      "link": "",
-      "featured": false,
-      "stats": []
-    },
-    {
       "title": "Business Analyst Job Market Analysis (SQL)",
       "category": "SQL & Data",
       "desc": "SQL analysis of Business Analyst job postings: where the top-paying roles are, what the lowest-paying ones look like, and which skills appear in the highest salaries.",
@@ -31,7 +15,7 @@
       "approach": "Wrote PostgreSQL queries using joins across four tables (postings, companies, skills), CTEs, filtering and aggregation. Compared the highest and lowest salaries, counted skill demand, and documented the results with charts in a GitHub README.",
       "outcome": "Salaries ranged from about $30K to about $387K a year. SQL was the most requested skill (312 postings), ahead of Excel (226) and Tableau (212), and the top-paying posting also listed Python, R and big-data tools. The README states the limits of the analysis, including small samples.",
       "link": "https://github.com/kutubbahar2018-cpu/Sqp_project",
-      "featured": true,
+      "featured": false,
       "stats": [
         {
           "value": "312",
@@ -81,6 +65,22 @@
       "outcome": "Every change I save in the editor is committed to GitHub and republished automatically, with zoom and position controls for my profile photo.",
       "link": "https://github.com/kutubbahar2018-cpu/kutubuddinbahar.github.io",
       "featured": true,
+      "stats": []
+    },
+    {
+      "title": "Macroeconomic Development Analysis — Costa Rica, Chile & Poland",
+      "category": "Research",
+      "desc": "Independent research project comparing macroeconomic indicators across three countries over a 20-year period.",
+      "tools": [
+        "World Bank Data",
+        "Excel",
+        "Research & Analysis"
+      ],
+      "problem": "How do development trajectories differ across three distinct economies over two decades?",
+      "approach": "Compiled and compared macroeconomic indicators using World Bank data across the three countries.",
+      "outcome": "Interpreted economic trends and presented findings in a structured research format.",
+      "link": "",
+      "featured": false,
       "stats": []
     }
   ]
