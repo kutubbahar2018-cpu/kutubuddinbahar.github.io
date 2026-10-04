@@ -1,0 +1,11 @@
+{
+  "featured": "pic3.jpg",
+  "items": [
+    {"image": "Pic1.jpg", "caption": ""},
+    {"image": "pic2.jpg", "caption": ""},
+    {"image": "pic3.jpg", "caption": ""},
+    {"image": "pic4.jpg", "caption": ""},
+    {"image": "pic5.jpg", "caption": ""},
+    {"image": "pic6.jpg", "caption": ""}
+  ]
+}
