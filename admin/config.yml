@@ -16,6 +16,9 @@ collections:
         fields:
           - { label: "Top-left name (next to the small photo)", name: navName, widget: string, required: false }
           - { label: "Top-left small photo", name: navPhoto, widget: image, required: false }
+          - { label: "Photo zoom (1 = normal, 2 = twice as close)", name: navPhotoZoom, widget: number, value_type: float, min: 1, max: 4, step: 0.1, default: 1, required: false }
+          - { label: "Photo position left-right (0 = left, 50 = center, 100 = right)", name: navPhotoX, widget: number, value_type: int, min: 0, max: 100, step: 1, default: 50, required: false }
+          - { label: "Photo position up-down (0 = top, 100 = bottom)", name: navPhotoY, widget: number, value_type: int, min: 0, max: 100, step: 1, default: 20, required: false }
           - { label: "Hero intro paragraph", name: heroDescription, widget: text }
           - { label: "CV file name (upload the PDF to the repo root, then type its name)", name: cvFile, widget: string }
 
