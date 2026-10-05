@@ -58,7 +58,7 @@
         },
         {
           "name": "CTEs",
-          "level": "2"
+          "level": "3"
         }
       ]
     },
@@ -130,6 +130,31 @@
         {
           "name": "Excel",
           "level": "2"
+        }
+      ]
+    },
+    {
+      "name": "Power BI",
+      "skills": [
+        {
+          "name": "Data Visualization",
+          "level": "2"
+        },
+        {
+          "name": "Dashboard Design",
+          "level": "2"
+        },
+        {
+          "name": "Power Query",
+          "level": "1"
+        },
+        {
+          "name": "DAX",
+          "level": "1"
+        },
+        {
+          "name": "Data Cleaning",
+          "level": "1"
         }
       ]
     },
